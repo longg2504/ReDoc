@@ -14,5 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('client.index.index');
+});
+Route::get('/view-history', function () {
+    return view('client.profile.index');
 });
