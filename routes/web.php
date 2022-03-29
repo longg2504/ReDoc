@@ -14,8 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('client.index.index');
+    return view('client.index');
 });
-Route::get('/view-history', function () {
-    return view('client.profile.index');
+Route::get('/list-profile', function () {
+    return view('client.list-profile');
+});
+
+Route::get('/setting', function () {
+    return view('client.setting');
+});
+Route::get('/medical-check-up', function () {
+    return view('client.medical-check-up');
 });

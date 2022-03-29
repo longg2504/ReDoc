@@ -235,20 +235,24 @@ body {
     padding-left: 24px;
     padding-right: 24px;
 }
-.row-ttyt{
+
+.row-ttyt {
     width: 100%;
     height: 78.5px;
     border-bottom: 0.5px solid #cbcbcb;
 }
+
 .row-ttyt-block1 {
     flex: 0 0 66px;
     height: 100%;
     padding: 14.5px 0 0;
 }
+
 .row-ttyt-block2 {
     flex: 1 0px;
     height: 100%;
 }
+
 .form-row {
     display: flex;
     flex-wrap: wrap;
@@ -275,4 +279,23 @@ body {
     line-height: 20px;
     letter-spacing: -.078px;
     color: #545454;
+}
+
+
+/* profile */
+.p-125 {
+    padding: 1.25rem;
+}
+
+.prof-sidebar-item-active {
+    color: #3bccbb;
+    background: rgba(206, 242, 238, .25);
+    border-left: 4px solid;
+}
+
+.prof-sidebar-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0.5rem 1.25rem !important;
 }
