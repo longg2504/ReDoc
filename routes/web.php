@@ -14,5 +14,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('client.index');
+});
+Route::get('/list-profile', function () {
+    return view('client.list-profile');
+});
+
+Route::get('/setting/change-phone', function () {
+    return view('client.setting.change-phone');
+});
+
+Route::get('/setting/change-password', function () {
+    return view('client.setting.change-password');
+});
+Route::get('/medical-check-up', function () {
+    return view('client.medical-check-up');
 });
