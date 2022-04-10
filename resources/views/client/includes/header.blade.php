@@ -25,6 +25,14 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link text-md-center" href="/medical-check-up">
+                    <span class="material-icons-outlined d-md-block">
+                        <i class="fa fa-clock-o fa-nav" aria-hidden="true"></i>
+                    </span>
+                    Kê đơn
+                </a>
+            </li>
+            <li class="nav-item">
                 <a tabindex="-1" aria-disabled="true" class="nav-link text-md-center" href="/list-profile">
                     <span class="material-icons-outlined d-md-block">
                         <i class="fa fa-user-md fa-nav" aria-hidden="true"></i>
