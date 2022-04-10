@@ -19,8 +19,7 @@
                                 class="prof-sidebar-item prof-sidebar-item-active" tabindex="0">
                                 <div class="p-2">
 
-                                    <img src="/assets/img/setting-call-active.svg"
-                                        class="ng-star-inserted" />
+                                    <img src="/assets/img/setting-call-active.svg" class="ng-star-inserted" />
 
                                 </div>
                                 <div class="p-2">
@@ -29,26 +28,10 @@
                             </div>
                             <div routerlink="/setting/change-password" class="prof-sidebar-item" tabindex="0">
                                 <div class="p-2">
-                                    <img src="/assets/img/setting-lock.svg"
-                                        class="ng-star-inserted" />
+                                    <img src="/assets/img/setting-lock.svg" class="ng-star-inserted" />
                                 </div>
                                 <div class="p-2">
                                     <a><span class="font-weight-600">Đổi mật khẩu</span></a>
-                                </div>
-                            </div>
-                            <div class="prof-sidebar-item">
-                                <div class="p-2"><img src="/assets/img/rules.svg" />
-                                </div>
-                                <div class="p-2">
-                                    <a routerlink="/dieukhoan" href="/dieukhoan"><span class="font-weight-600">Điều
-                                            khoản sử dụng</span></a>
-                                </div>
-                            </div>
-                            <div class="prof-sidebar-item">
-                                <div class="p-2"><img src="/assets/img/remove.svg" />
-                                </div>
-                                <div class="p-2">
-                                    <a><span class="font-weight-600">Xóa tài khoản</span></a>
                                 </div>
                             </div>
                         </div>
@@ -93,4 +76,43 @@
 
         <!---->
     </div>
+    <style>
+        .btn-logout {
+            background: #fff !important;
+            border: 1px solid #e2e2e2 !important;
+            box-sizing: border-box;
+            border-radius: 8px;
+            color: #f23939 !important;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .font-weight-600 {
+            font-weight: 600;
+        }
+
+        .vn-btn-success {
+            color: #fff !important;
+            background-color: #3bccbb !important;
+            border-color: #3bccbb !important;
+        }
+
+        .btn {
+            display: inline-block;
+            font-weight: 400;
+            color: #212529;
+            text-align: center;
+            vertical-align: middle;
+            -webkit-user-select: none;
+            user-select: none;
+            background-color: transparent;
+            border: 1px solid transparent;
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: 0.25rem;
+            transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        }
+
+    </style>
 @endsection

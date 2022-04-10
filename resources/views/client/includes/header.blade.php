@@ -29,11 +29,11 @@
                     <span class="material-icons-outlined d-md-block">
                         <i class="fa fa-user-md fa-nav" aria-hidden="true"></i>
                     </span>
-                    Hồ sơ
+                    Bác sĩ gần bạn
                 </a>
             </li>
             <li class="nav-item">
-                <a tabindex="-1" aria-disabled="true" class="nav-link text-md-center" href="/setting">
+                <a tabindex="-1" aria-disabled="true" class="nav-link text-md-center" href="/setting/change-password">
                     <span class="material-icons-outlined d-md-block">
                         <i class="fa fa-cog fa-nav" aria-hidden="true"></i>
                     </span>
