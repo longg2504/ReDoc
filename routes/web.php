@@ -30,3 +30,9 @@ Route::get('/setting/change-password', function () {
 Route::get('/medical-check-up', function () {
     return view('client.medical-check-up');
 });
+Route::get('/login', function () {
+    return view('client.login');
+});
+Route::get('/sign-up', function () {
+    return view('client.sign-up');
+});
