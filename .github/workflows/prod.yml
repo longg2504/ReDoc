@@ -1,0 +1,39 @@
+# name: Hires-project
+
+# on:
+#     push:
+#         branches:
+#             - master
+#     pull_request:
+
+# env:
+#   VERSION: v1.0
+
+# jobs:
+#     Deploy:
+#         runs-on: ubuntu-latest
+#         steps:
+#             - uses: actions/checkout@v2
+
+#             - name: Log into registry
+#               run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+#             - name: Build image
+#               run: docker build -t hire:$VERSION .
+
+#             - name: Push image
+#               run: |
+#                   docker tag hire:$VERSION ghcr.io/kaitoryouga/hire/hire:$VERSION
+#                   docker tag hire:$VERSION ghcr.io/kaitoryouga/hire/hire:latest
+#                   docker push ghcr.io/kaitoryouga/hire/hire:$VERSION
+#                   docker push ghcr.io/kaitoryouga/hire/hire:latest
+#     Redeploy:
+#       name: Redeploy webhook call
+#       runs-on: ubuntu-18.04
+#       needs: [Deploy]
+#       steps:
+#         - name: Deploy docker container webhook
+#           uses: joelwmale/webhook-action@master
+#           env:
+#             WEBHOOK_URL: ${{ secrets.DEPLOY_WEBHOOK_URL  }}
+#             data: "{ 'myField': 'myFieldValue'}"

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DarkModeController;
+use App\Libs\RouteLib;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,6 +14,51 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('dark-mode-switcher', [DarkModeController::class, 'switch'])->name('dark-mode-switcher');
+// Admin test route
+
+Route::prefix('ad')->namespace('App\Http\Controllers\Admin')->group(function () {
+
+    Route::prefix('auth')->namespace('Auth')->group(function () {
+        Route::get('/login', 'AuthController@login')->name('admin.auth.login');
+        Route::post('login', 'AuthController@postLogin')->name('admin.auth.postLogin');
+        Route::get('/logout', 'AuthController@logout')->name('admin.auth.logout');
+    });
+
+    Route::middleware('admin')->group(function () {
+
+        Route::get('/', 'DashboardController@index')->name('admin.dashboard.index');
+        RouteLib::generateRoute('settings', 'SettingsController', 'settings');
+        RouteLib::generateRoute('role', 'RoleController', 'role');
+        RouteLib::generateRoute('users', 'UsersController', 'users');
+        RouteLib::generateRoute('administrators', 'AdministratorsController', 'administrators');
+        RouteLib::generateRoute('categories', 'CategoriesController', 'categories');
+        RouteLib::generateRoute('drugstores', 'DrugstoresController', 'drugstores');
+        RouteLib::generateRoute('medicines', 'MedicinesController', 'medicines');
+        RouteLib::generateRoute('diseases', 'DiseasesController', 'diseases');
+        RouteLib::generateRoute('symptoms', 'SymptomsController', 'symptoms');
+        RouteLib::generateRoute('prescriptions', 'PrescriptionsController', 'prescriptions');
+        RouteLib::generateRoute('posts', 'PostsController', 'posts');
+        RouteLib::generateRoute('tags', 'TagsController', 'tags');
+        RouteLib::generateRoute('post-tags', 'PostTagsController', 'post-tags');
+        RouteLib::generateRoute('disease-symptoms', 'DiseaseSymptomsController', 'disease-symptoms');
+
+    });
+});
+
+// Web
+// Route::namespace('App\Http\Controllers\Client')->group(function () {
+
+//     Route::get('/', function () {
+//         return view('admin.pages.common.add');
+//     });
+//     Route::get('/dang-nhap', 'AuthController@login')->name('login');
+//     Route::get('/dang-xuat', 'AuthController@logout')->name('logout');
+//     Route::post('/dang-nhap', 'AuthController@postLogin')->name('postLogin');
+//     Route::get('/dang-ky', 'AuthController@register')->name('register');
+//     Route::post('/dang-ky', 'AuthController@postRegister')->name('postRegister');
+// });
 
 Route::get('/', function () {
     return view('client.index');

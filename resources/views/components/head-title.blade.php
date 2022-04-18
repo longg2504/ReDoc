@@ -1,0 +1,1 @@
+<title>{{ strtoupper($title) }}</title>
