@@ -6,7 +6,7 @@ use App\Helper\Common;
 use App\Http\Controllers\AdminController;
 use App\Http\Requests\Admin\RequireRequest;
 use App\Http\Requests\Admin\UpdateRequest;
-use App\Models\Diseases as MainModel;
+use App\Models\Symptoms as MainModel;
 
 class SymptomsController extends AdminController
 {

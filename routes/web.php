@@ -48,17 +48,14 @@ Route::prefix('ad')->namespace('App\Http\Controllers\Admin')->group(function () 
 });
 
 // Web
-// Route::namespace('App\Http\Controllers\Client')->group(function () {
+Route::namespace('App\Http\Controllers\Client')->group(function () {
 
-//     Route::get('/', function () {
-//         return view('admin.pages.common.add');
-//     });
-//     Route::get('/dang-nhap', 'AuthController@login')->name('login');
-//     Route::get('/dang-xuat', 'AuthController@logout')->name('logout');
-//     Route::post('/dang-nhap', 'AuthController@postLogin')->name('postLogin');
-//     Route::get('/dang-ky', 'AuthController@register')->name('register');
-//     Route::post('/dang-ky', 'AuthController@postRegister')->name('postRegister');
-// });
+    // Route::get('/medical-check-up', function () {
+    //     return view('client.medical-check-up');
+    // });
+    Route::get('/medical-check-up', 'MedicalCheckController@index')->name('client.medical-check-up');
+    // Route::post('/medical-check-up/symptoms', 'MedicalCheckController@getSymptoms')->name('client.getSymptoms');
+});
 
 Route::get('/', function () {
     return view('client.index');
@@ -74,9 +71,7 @@ Route::get('/setting/change-phone', function () {
 Route::get('/setting/change-password', function () {
     return view('client.setting.change-password');
 });
-Route::get('/medical-check-up', function () {
-    return view('client.medical-check-up');
-});
+
 Route::get('/login', function () {
     return view('client.login');
 });

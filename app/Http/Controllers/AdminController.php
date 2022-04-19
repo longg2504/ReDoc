@@ -360,17 +360,16 @@ class AdminController extends BaseController
 
             if ($key == 'type' && $value == 3) {
                 $value = $this->upload($data["setting_value"]);
-            } else {
-                $value = $this->upload($value);
             }
 
             $object->{$key} = $value;
         }
 
+
+
         if ($this->checkHasColumn('updated_id')) {
             $object->updated_id = null;
         }
-
 
         $object->save();
 

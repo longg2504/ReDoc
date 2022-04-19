@@ -54,7 +54,7 @@ class DiseaseSymptomsController extends AdminController
         $this->rulesCreate = (new RequireRequest())->rules(MainModel::class, $this->notAcceptedCreateAndEdit);
         $this->attributesCreate = (new RequireRequest)->attributes();
 
-        $this->rulesUpdate = (new UpdateRequest());
+        $this->rulesUpdate = (new UpdateRequest())->rules(MainModel::class, $this->notAcceptedCreateOnlyEdit);
         $this->attributesUpdate = (new UpdateRequest)->attributes();
     }
 }

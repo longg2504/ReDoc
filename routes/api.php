@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::namespace('App\Http\Controllers\Client')->group(function () {
+
+    Route::post('/medical-check-up/symptoms', 'MedicalCheckController@getSymptoms')->name('client.getSymptoms');
+    Route::post('/medical-check-up/diseases', 'MedicalCheckController@getDiseases')->name('client.getDiseases');
 });
