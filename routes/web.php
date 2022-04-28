@@ -75,6 +75,11 @@ Route::get('/setting/change-password', function () {
 Route::get('/login', function () {
     return view('client.login');
 });
+
 Route::get('/sign-up', function () {
     return view('client.sign-up');
+});
+
+Route::get('/matrix', function () {
+    return view('client.matrix');
 });

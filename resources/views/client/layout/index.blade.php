@@ -14,6 +14,11 @@
 
     <link rel="stylesheet" href="{{asset('assets/css/index.css')}}">
     <link rel="stylesheet" href="{{asset('/assets/css/common.css')}}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script defer
+            src="https://maps.googleapis.com/maps/api/js?libraries=places&language=vi&key=AIzaSyAfPMMozZ7nfUi9jG9IidOMx2Bh16h1x3E"
+            type="text/javascript"></script>
     @yield('css')
 </head>
 
