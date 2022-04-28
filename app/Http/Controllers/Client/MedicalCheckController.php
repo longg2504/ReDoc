@@ -33,14 +33,16 @@ class MedicalCheckController extends Controller
 
             foreach ($preCheck as $preCheckKey => $preCheckValue) {
 
-                $check = Disease_symptoms::where('symptom_id', $value)->where('disease_id', $preCheckValue->disease_id)->get();
-                if (count($check) == 0) {
+                $check = $preCheckValue->diseases->symptoms->pluck('id')->toArray();
+
+                if (!in_array($value, $check)) {
                     unset($preCheck[$preCheckKey]);
                 }
             }
         }
 
         foreach ($preCheck as $value) {
+
             $check[] = $value->diseases;
             $prescription[] = $value->diseases->prescriptions;
         }
