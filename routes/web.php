@@ -59,9 +59,9 @@ Route::namespace('App\Http\Controllers\Client')->group(function () {
     Route::get('/login', 'AuthController@login')->name('client.login');
     Route::post('/login', 'AuthController@postLogin')->name('client.postLogin');
     Route::get('/logout', 'AuthController@logout')->name('client.logout');
-    Route::get('/', function () {
-        return view('client.index');
-    })->name('client.index');
+    Route::get('/', 'HomeController@index')->name('client.index');
+    Route::get('/category/{category_id}', 'HomeController@getByCategory')->name('client.category');
+    Route::get('/post/{post_id}', 'HomeController@getByPost')->name('client.post');
 
 });
 

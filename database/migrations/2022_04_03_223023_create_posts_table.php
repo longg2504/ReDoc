@@ -19,6 +19,8 @@ class CreatePostsTable extends Migration
             $table->text('content');
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->unsignedBigInteger('media_id');
+            $table->foreign('media_id')->references('id')->on('media')->onDelete('cascade');
             $table->boolean('active')->default(true);
             $table->timestamps();
         });
