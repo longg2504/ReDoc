@@ -1,6 +1,7 @@
 
 
 $(document).ready(function () {
+    $('.list-diseases').hide();
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -23,28 +24,44 @@ $(document).ready(function () {
         },
     });
 
+
+    `
+    `
+
     $('.btn-search-diseases').on('click', function () {
         let symptoms = [];
         let symptomItems = $('input[name="symptom[]"]:checked');
-        for(let i = 0; i < symptomItems.length; i++) {
+        for (let i = 0; i < symptomItems.length; i++) {
             symptoms.push(symptomItems[i].value);
         }
-        console.log('listSymptoms=' + symptoms);
         $.ajax({
             type: 'POST',
             data: 'listSymptoms=' + symptoms,
             url: '/api/medical-check-up/diseases',
             success: (data) => {
-               console.log(data);
+                if (data.length > 0) {
+                    $('.list-diseases').show();
+                    for (let i = 0; i < data.length; i++) {
+                        if (data[i].length > 0) {
+                            $('.diseases').append(`
+                            <div class="col-md-4">
+                                <a href="/diseases/${data[i][0].diseases.id}">
+                                    <img class="img-fluid"
+                                        src="https://vinmec-prod.s3.amazonaws.com/images/20190514_082820_373671_1738.jpg_wh1200.max-1800x1800.jpg"
+                                        alt="" srcset="">
+                                    <h4 class="card-title">${data[i][0].diseases.name}</h4>
+                                    <p class="card-text">Đau đầu là cảm giác khó chịu nhất của mỗi người, có rất nhiều
+                                        nguyên
+                                        nhân gây ra....</p>
+                                </a>
+                            </div>
+                        `);
+                        }
+                    }
+                }
             },
         });
-        // for (var option of $('#framework').options) {
-        //     // if (option.selected) {
-        //     //     selected.push(option.value);
-        //     // }
-        //     console.log(option);
-        // }
-        // console.log($('#framework').val());
+
     });
     $('#framework').multiselect({
         buttonWidth: '800px',

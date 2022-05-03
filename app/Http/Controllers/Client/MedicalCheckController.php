@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Models\Disease_symptoms;
+use App\Models\Diseases;
 use App\Models\Symptoms;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -49,6 +50,19 @@ class MedicalCheckController extends Controller
 
         return response()->json($prescription);
     }
-}
 
-?>
+
+    public function showDisease($id) {
+        $disease = Diseases::find($id);
+        $preCheck = Disease_symptoms::with('symptoms')->where('disease_id', $id)->get();
+
+        foreach ($preCheck as $value) {
+
+            $check[] = $value->diseases;
+            $listSymptoms[] = $value->symptoms;
+            $prescription[] = $value->diseases->prescriptions()->with('medicines', 'diseases')->get();
+        }
+     
+        return view('client.diseases-detail', compact('disease', 'prescription','listSymptoms'));
+    }
+}
