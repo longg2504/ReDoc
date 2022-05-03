@@ -16,14 +16,10 @@
     <link rel="stylesheet" href="{{asset('assets/css/common.css')}}">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<<<<<<< HEAD
-    <script defernsrc="https://maps.googleapis.com/maps/api/js?libraries=places&language=vi&key=AIzaSyAfPMMozZ7nfUi9jG9IidOMx2Bh16h1x3E" type="text/javascript"></script>
-=======
     <script defer
             src="https://maps.googleapis.com/maps/api/js?libraries=places&language=vi&key=AIzaSyAfPMMozZ7nfUi9jG9IidOMx2Bh16h1x3E"
             type="text/javascript"></script>
     <script src="{{asset('js/sweetalert.all.js')}}"></script>
->>>>>>> 48e0193226c8113c6cb1cb4d700ac54c50ff1a65
     @yield('css')
 </head>
 
