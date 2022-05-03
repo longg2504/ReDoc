@@ -63,7 +63,6 @@ Route::namespace('App\Http\Controllers\Client')->group(function () {
         return view('client.index');
     })->name('client.index');
 
-    // Route::post('/medical-check-up/symptoms', 'MedicalCheckController@getSymptoms')->name('client.getSymptoms');
 });
 
 Route::get('/list-profile', function () {
