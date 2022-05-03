@@ -54,12 +54,17 @@ Route::namespace('App\Http\Controllers\Client')->group(function () {
     //     return view('client.medical-check-up');
     // });
     Route::get('/medical-check-up', 'MedicalCheckController@index')->name('client.medical-check-up');
-    // Route::post('/medical-check-up/symptoms', 'MedicalCheckController@getSymptoms')->name('client.getSymptoms');
+    Route::get('/sign-up', 'AuthController@register')->name('client.register');
+    Route::post('/sign-up', 'AuthController@postRegister')->name('client.postRegister');
+    Route::get('/login', 'AuthController@login')->name('client.login');
+    Route::post('/login', 'AuthController@postLogin')->name('client.postLogin');
+    Route::get('/logout', 'AuthController@logout')->name('client.logout');
+    Route::get('/', function () {
+        return view('client.index');
+    })->name('client.index');
+
 });
 
-Route::get('/', function () {
-    return view('client.index');
-});
 Route::get('/list-profile', function () {
     return view('client.list-profile');
 });
@@ -70,14 +75,6 @@ Route::get('/setting/change-phone', function () {
 
 Route::get('/setting/change-password', function () {
     return view('client.setting.change-password');
-});
-
-Route::get('/login', function () {
-    return view('client.login');
-});
-
-Route::get('/sign-up', function () {
-    return view('client.sign-up');
 });
 
 Route::get('/matrix', function () {

@@ -44,7 +44,7 @@ class MedicalCheckController extends Controller
         foreach ($preCheck as $value) {
 
             $check[] = $value->diseases;
-            $prescription[] = $value->diseases->prescriptions;
+            $prescription[] = $value->diseases->prescriptions()->with('medicines', 'diseases')->get();
         }
 
         return response()->json($prescription);

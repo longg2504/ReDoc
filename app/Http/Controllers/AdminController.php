@@ -316,7 +316,6 @@ class AdminController extends BaseController
             $model = $model;
         }
 
-
         $data = array_diff_key($data, array_flip($this->notAcceptedCreateAndEdit));
 
         if (!isset($data["active"])) {
@@ -333,7 +332,7 @@ class AdminController extends BaseController
             $className = get_class($model);
             $object = new $className;
 
-            if ($this->checkHasColumn('created_id')) {
+            if ($this->checkHasColumn('created_id', $model)) {
                 $object->created_id = null;
             }
 
@@ -364,12 +363,14 @@ class AdminController extends BaseController
                 $value = $this->upload($data["setting_value"]);
             }
 
+            if ($key == 'password') {
+                $value = bcrypt($value);
+            }
+
             $object->{$key} = $value;
         }
 
-
-
-        if ($this->checkHasColumn('updated_id')) {
+        if ($this->checkHasColumn('updated_id', $model)) {
             $object->updated_id = null;
         }
 
@@ -378,9 +379,9 @@ class AdminController extends BaseController
         return $object;
     }
 
-    public function checkHasColumn(string $column): bool
+    public function checkHasColumn(string $column, $model): bool
     {
-        return Schema::hasColumn($this->model->getTable(), $column);
+        return Schema::hasColumn($model->getTable(), $column);
     }
 
     // Return type specific and default
