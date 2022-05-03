@@ -19,10 +19,12 @@
     <script defer
             src="https://maps.googleapis.com/maps/api/js?libraries=places&language=vi&key=AIzaSyAfPMMozZ7nfUi9jG9IidOMx2Bh16h1x3E"
             type="text/javascript"></script>
+    <script src="{{asset('js/sweetalert.all.js')}}"></script>
     @yield('css')
 </head>
 
 <body>
+    @include('sweetalert::alert')
     @include('client.includes.header')
     <div id="wrapper" class="container">
         @yield('content')

@@ -12,6 +12,7 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <link rel="stylesheet" href="/assets/css/login.css">
+    <script src="{{asset('js/sweetalert.all.js')}}"></script>
 </head>
 <style>
     .auth-container {
@@ -28,6 +29,7 @@
 </style>
 
 <body>
+    @include('sweetalert::alert')
     <div class="auth-container">
         <div class="col-md-4 col-sm-12 col-xs-12 p-0 h-100">
             <div class="auth-left center p-5 h-100">
@@ -37,25 +39,23 @@
                     </div>
                     <div class="page-title text-center mt-4 mb-4">ĐĂNG NHẬP</div>
                     <!---->
-                    <form class="ng-untouched ng-pristine ng-valid">
+                    <form action="{{ route('client.postLogin') }}" method='post' class="ng-untouched ng-pristine ng-valid">
+                        @csrf
                         <div class="form-group">
-                            <label>Số điện thoại</label>
-                            <input placeholder="Nhập số điện thoại" type="text" formcontrolname="phoneNumber"
+                            <label>Email</label>
+                            <input name="email" placeholder="Nhập email" type="text" formcontrolname="email"
                                 class="form-control input-custom ng-untouched ng-pristine ng-valid" />
                         </div>
                         <div class="form-group">
                             <label>Mật khẩu</label>
                             <div class="input-group mb-3">
-                                <input formcontrolname="password" placeholder="Nhập mật khẩu"
+                                <input name="password" formcontrolname="password" placeholder="Nhập mật khẩu"
                                     class="form-control input-custom ng-untouched ng-pristine ng-valid"
                                     type="password" />
                             </div>
                         </div>
                         <div class="form-group d-flex justify-content-between">
                             <div class="d-inline-flex remember-cb">
-                                <input type="checkbox" formcontrolname="remember" id="remember"
-                                    class="form-control-sm ng-untouched ng-pristine ng-valid" /><label for="remember"
-                                    class="mb-03">Ghi nhớ</label>
                             </div>
                             <div class="font-weight-600"><a href="">Quên mật khẩu?</a></div>
                         </div>
