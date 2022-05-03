@@ -1,16 +1,8 @@
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
 
-(function (cash) {
-    cash(".editorArea").each(function (index) {
-        const el = this;
-        ClassicEditor.create(el)
-            .then( editor => {
-                editor.model.document.on('change:data', () => {
-                    cash('#hiddenTextArea_' + index).html(editor.getData());
-                });
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+cash(".editor").each(function () {
+    const el = this;
+    ClassicEditor.create(el).catch((error) => {
+        console.error(error);
     });
-})(cash);
+});

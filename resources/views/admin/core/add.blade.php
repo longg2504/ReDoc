@@ -16,8 +16,10 @@ if (!isset($data)) {
 
 @section('subcontent')
 
-    <form id="form" class="validate-form dropzone" action="{{ $link }}" method="post" enctype="multipart/form-data"
+    <form id="form" class="validate-form" action="{{ $link }}" method="post" enctype="multipart/form-data"
         data-single="true">
+        {{-- <form id="form" class="validate-form dropzone" action="{{ $link }}" method="post" enctype="multipart/form-data"
+        data-single="true"> --}}
         {{ csrf_field() }}
         <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
             <h2 class="text-lg font-medium mr-auto">{{ !empty($data) ? "Cập nhập $title" : "Tạo $title" }}</h2>

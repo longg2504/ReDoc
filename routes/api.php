@@ -22,4 +22,9 @@ Route::namespace('App\Http\Controllers\Client')->group(function () {
 
     Route::post('/medical-check-up/symptoms', 'MedicalCheckController@getSymptoms')->name('client.getSymptoms');
     Route::post('/medical-check-up/diseases', 'MedicalCheckController@getDiseases')->name('client.getDiseases');
+
+});
+
+Route::namespace('App\Http\Controllers\Admin')->group(function () {
+    Route::post('/upload', 'UploadController@upload')->name('admin.upload.ckeditor');
 });

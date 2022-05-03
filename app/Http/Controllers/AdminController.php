@@ -173,6 +173,8 @@ class AdminController extends BaseController
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+        // dd($request->all());
+
         $this->data = $this->model::findOrFail($id);
 
         if (empty($this->data)) {
@@ -382,7 +384,7 @@ class AdminController extends BaseController
     }
 
     // Return type specific and default
-    public function checkType($column)
+    public function checkType($column, $typeRaw)
     {
         switch ($column) {
 
@@ -413,6 +415,12 @@ class AdminController extends BaseController
             default:
                 $type = 'text';
                 break;
+        }
+
+        if ($typeRaw == 'crud' && $column == 'content') {
+            $type = 'ckeditor';
+        } elseif ($column == 'content') {
+            $type = 'textarea';
         }
 
         return $type;
@@ -468,7 +476,7 @@ class AdminController extends BaseController
                 $data = [
                     'label' => ucfirst(trans()->has('admin.' . $value->Field) ? trans('admin.' . $value->Field) : $value->Field),
                     'name' => $value->Field,
-                    'type' => $this->checkType($value->Field)
+                    'type' => $this->checkType($value->Field, $type)
                 ];
             }
         } else {
@@ -476,7 +484,7 @@ class AdminController extends BaseController
             $data = [
                 'label' => ucfirst(trans()->has('admin.' . $value->Field) ? trans('admin.' . $value->Field) : $value->Field),
                 'name' => $value->Field,
-                'type' => $this->checkType($value->Field)
+                'type' => $this->checkType($value->Field, $type)
             ];
         }
 

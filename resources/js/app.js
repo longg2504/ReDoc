@@ -15,11 +15,10 @@
  import "./tippy";
  import "./datepicker";
  import "./tom-select";
- import "./dropzone";
  import "./validation";
  import "./zoom";
  import "./calendar";
- import "./ckeditor"
+//  import "./ckeditor"
 
  /*
   |--------------------------------------------------------------------------
