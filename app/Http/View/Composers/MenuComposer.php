@@ -6,6 +6,7 @@ use Illuminate\View\View;
 use App\Main\TopMenu;
 use App\Main\SideMenu;
 use App\Main\SimpleMenu;
+use Illuminate\Support\Str;
 
 class MenuComposer
 {
@@ -17,18 +18,20 @@ class MenuComposer
      */
     public function compose(View $view)
     {
-        $pageName = request()->route()->getName();
-        $layout = $this->layout($view);
-        $activeMenu = $this->activeMenu($pageName, $layout);
+        if (Str::contains($view->getName(), 'admin')) {
+            $pageName = request()->route()->getName();
+            $layout = $this->layout($view);
+            $activeMenu = $this->activeMenu($pageName, $layout);
 
-        $view->with('top_menu', TopMenu::menu());
-        $view->with('side_menu', SideMenu::menu());
-        $view->with('simple_menu', SimpleMenu::menu());
-        $view->with('first_level_active_index', $activeMenu['first_level_active_index']);
-        $view->with('second_level_active_index', $activeMenu['second_level_active_index']);
-        $view->with('third_level_active_index', $activeMenu['third_level_active_index']);
-        $view->with('page_name', $pageName);
-        $view->with('layout', $layout);
+            $view->with('top_menu', TopMenu::menu());
+            $view->with('side_menu', SideMenu::menu());
+            $view->with('simple_menu', SimpleMenu::menu());
+            $view->with('first_level_active_index', $activeMenu['first_level_active_index']);
+            $view->with('second_level_active_index', $activeMenu['second_level_active_index']);
+            $view->with('third_level_active_index', $activeMenu['third_level_active_index']);
+            $view->with('page_name', $pageName);
+            $view->with('layout', $layout);
+        }
     }
 
     /**

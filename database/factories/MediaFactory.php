@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Storage;
 
 class MediaFactory extends Factory
 {
@@ -13,6 +14,7 @@ class MediaFactory extends Factory
      */
     public function definition()
     {
+
         return [
             'path' => 'test',
             'name' => $this->faker->image('public/storage/images/test/', 400, 400, null, false),
