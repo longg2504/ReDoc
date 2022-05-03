@@ -16,8 +16,8 @@ class MedicalCheckController extends Controller
 
     public function getSymptoms(Request $request)
     {
-        $data = $request->all();
-        $check = Symptoms::where('name', 'like', '%' . $data['keyword'] . '%')->get();
+
+        $check = Symptoms::all();
         return response()->json($check);
     }
 
