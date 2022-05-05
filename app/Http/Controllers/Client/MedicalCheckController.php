@@ -53,10 +53,11 @@ class MedicalCheckController extends Controller
 
 
     public function showDisease($id) {
+
         $disease = Diseases::find($id);
-        $preCheck = Disease_symptoms::with('symptoms')->where('disease_id', $id)->get();
-        
-     
-        return view('client.diseases-detail', compact('disease'));
+        $symptoms = $disease->symptoms()->get();
+        $prescription = $disease->prescriptions()->with('medicines')->get();
+
+        return view('client.diseases-detail', compact('disease', 'symptoms', 'prescription'));
     }
 }
