@@ -17,6 +17,8 @@ class CreateDiseasesTable extends Migration
             $table->id();
             $table->string('name');
             $table->integer('age');
+            $table->unsignedBigInteger('media_id');
+            $table->foreign('media_id')->references('id')->on('media')->onDelete('cascade');
             $table->boolean('active')->default(true);
             $table->timestamps();
         });

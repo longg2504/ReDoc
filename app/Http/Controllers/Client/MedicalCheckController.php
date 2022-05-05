@@ -62,7 +62,7 @@ class MedicalCheckController extends Controller
             $listSymptoms[] = $value->symptoms;
             $prescription[] = $value->diseases->prescriptions()->with('medicines', 'diseases')->get();
         }
-     
+
         return view('client.diseases-detail', compact('disease', 'prescription','listSymptoms'));
     }
 }

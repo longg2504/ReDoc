@@ -24,10 +24,6 @@ $(document).ready(function () {
         },
     });
 
-
-    `
-    `
-
     $('.btn-search-diseases').on('click', function () {
         let symptoms = [];
         let symptomItems = $('input[name="symptom[]"]:checked');
@@ -39,6 +35,7 @@ $(document).ready(function () {
             data: 'listSymptoms=' + symptoms,
             url: '/api/medical-check-up/diseases',
             success: (data) => {
+                console.log(data);
                 if (data.length > 0) {
                     $('.list-diseases').show();
                     for (let i = 0; i < data.length; i++) {
@@ -50,9 +47,7 @@ $(document).ready(function () {
                                         src="https://vinmec-prod.s3.amazonaws.com/images/20190514_082820_373671_1738.jpg_wh1200.max-1800x1800.jpg"
                                         alt="" srcset="">
                                     <h4 class="card-title">${data[i][0].diseases.name}</h4>
-                                    <p class="card-text">Đau đầu là cảm giác khó chịu nhất của mỗi người, có rất nhiều
-                                        nguyên
-                                        nhân gây ra....</p>
+                                    <p class="card-text"></p>
                                 </a>
                             </div>
                         `);
@@ -65,7 +60,7 @@ $(document).ready(function () {
     });
     $('#framework').multiselect({
         buttonWidth: '800px',
-        nonSelectedText: 'Choice symptoms',
+        nonSelectedText: 'Lựa chọn triệu chứng',
         enableFiltering: true,
         enableCaseInsensitiveFiltering: true,
     });
