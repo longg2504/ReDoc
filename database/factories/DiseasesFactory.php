@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Media;
 
 class DiseasesFactory extends Factory
 {
@@ -15,7 +16,8 @@ class DiseasesFactory extends Factory
     {
         return [
             "name" => $this->faker->name,
-            "age" => $this->faker->randomDigit
+            "age" => $this->faker->randomDigit,
+            "media_id" => Media::all()->random()->id
         ];
     }
 }

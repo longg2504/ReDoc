@@ -26,4 +26,9 @@ class Diseases extends Model
     {
         return $this->hasMany(Prescriptions::class, 'disease_id', 'id');
     }
+
+    public function media()
+    {
+        return $this->belongsTo(Media::class, 'media_id', 'id');
+    }
 }

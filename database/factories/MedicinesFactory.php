@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Media;
 
 class MedicinesFactory extends Factory
 {
@@ -15,7 +16,8 @@ class MedicinesFactory extends Factory
     {
         return [
             "name" => $this->faker->name,
-            "price" => $this->faker->randomFloat(2, 0, 100)
+            "price" => $this->faker->randomFloat(2, 0, 100),
+            "media_id" => Media::all()->random()->id
         ];
     }
 }

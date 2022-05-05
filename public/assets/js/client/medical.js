@@ -36,10 +36,6 @@ $(document).ready(function () {
         },
     });
 
-
-    `
-    `
-
     $('.btn-search-diseases').on('click', function () {
         let symptoms = $('select[name="symptoms[]"').val();
         $.ajax({
@@ -47,6 +43,7 @@ $(document).ready(function () {
             data: 'listSymptoms=' + symptoms,
             url: '/api/medical-check-up/diseases',
             success: (data) => {
+                console.log(data);
                 if (data.length > 0) {
                     $('.list-diseases').empty();
                     $('.diseases').show();

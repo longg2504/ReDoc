@@ -63,6 +63,8 @@ Route::namespace('App\Http\Controllers\Client')->group(function () {
 
     Route::get('/diseases/{id}', 'MedicalCheckController@showDisease')->name('client.showDisease');
 
+    Route::get('/matrix', 'MatrixController@index')->name('client.matrix');
+
 });
 
 Route::get('/list-profile', function () {
@@ -77,6 +79,8 @@ Route::get('/setting/change-password', function () {
     return view('client.setting.change-password');
 });
 
-Route::get('/matrix', function () {
-    return view('client.matrix');
-});
+Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderController@requestAction')
+    ->name('ckfinder_connector');
+
+Route::any('/ckfinder/browser', '\CKSource\CKFinderBridge\Controller\CKFinderController@browserAction')
+    ->name('ckfinder_browser');

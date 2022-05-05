@@ -16,4 +16,9 @@ class Medicines extends Model
         parent::boot();
         static::addGlobalScope(new ActiveScope());
     }
+
+    public function media()
+    {
+        return $this->belongsTo(Media::class, 'media_id', 'id');
+    }
 }
