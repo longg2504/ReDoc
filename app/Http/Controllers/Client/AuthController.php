@@ -65,7 +65,7 @@ class AuthController extends AdminController
             $this->updateOrCreate($request->all(), null, new User());
 
             Alert::success('success', 'Đăng ký thành công!');
-            return redirect()->route('client.index');
+            return redirect()->route('client.login');
 
         } catch (\Exception $ex) {
 

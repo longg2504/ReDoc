@@ -18,7 +18,7 @@ class MedicalCheckController extends Controller
     public function getSymptoms(Request $request)
     {
 
-        $check = Symptoms::all();
+        $check = Symptoms::all()->pluck('name','id');
         return response()->json($check);
     }
 
@@ -55,14 +55,8 @@ class MedicalCheckController extends Controller
     public function showDisease($id) {
         $disease = Diseases::find($id);
         $preCheck = Disease_symptoms::with('symptoms')->where('disease_id', $id)->get();
-
-        foreach ($preCheck as $value) {
-
-            $check[] = $value->diseases;
-            $listSymptoms[] = $value->symptoms;
-            $prescription[] = $value->diseases->prescriptions()->with('medicines', 'diseases')->get();
-        }
+        
      
-        return view('client.diseases-detail', compact('disease', 'prescription','listSymptoms'));
+        return view('client.diseases-detail', compact('disease'));
     }
 }
