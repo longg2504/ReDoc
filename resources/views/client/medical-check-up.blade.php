@@ -1,50 +1,47 @@
 @extends('client.layout.index')
-@section('css')
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
-@endsection
 @section('content')
     <style>
         .font-weight-600 {
             font-weight: 600;
         }
 
-        .filter {
-            transform: translateX(-5px);
-        }
-
-        .dropdown-toggle::after {
-            display: none;
-        }
-
     </style>
     <div id="wrapper" class="container">
-        <div class="breadcrumb-vn mt-2"><label class="font-weight-600">Trang chủ/</label><span>Tra cứu bệnh</span></div>
+        <div class="breadcrumb-vn mt-4"><label class="font-weight-600">Trang chủ/</label><span> Tra cứu bệnh</span></div>
+        <div class="card text-left mt-4">
+            <div class="card-body">
+                <h6 class="card-title">Tìm kiếm bệnh theo triệu chứng</h6>
+                <div class="row select-symptom mt-4 mb-4 ">
+                    <div class="col-md-8  pr-0">
+                        <select name="symptoms[]"
+                            class="js-example-placeholder-multiple js-states form-control choice-symptoms"
+                            multiple="multiple"></select>
+                    </div>
+                    <div class="col-md-2 pl-0">
+                        <button class="btn btn-primary btn-block btn-search-diseases">Tìm kiếm</button>
+                    </div>
+                </div>
+                <div class="diseases">
+                    <h6 class="card-title">Có thể bạn đã mắc phải những bệnh dưới đây</h6>
+                    <div class="card-columns list-diseases">
+                       
+                    </div>
+                </div>
+
+                <div class="not-diseases">
+                    <div class="alert alert-danger" role="alert">
+                        <strong>Không tìm thấy bệnh nào theo các triệu chứng trên</strong>
+                    </div>
+                </div>
 
 
-        <select id="framework" name="framework[]" multiple class="form-control">
-            <option value=""></option>
-        </select>
-        <button class="btn btn-primary btn-search-diseases">Search</button>
-
-        <div class="card mt-4 p-4 list-diseases">
-            <div class="row diseases">
-                
             </div>
         </div>
-
-
-
-
-
-
     </div>
 @endsection
 @section('js')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
     <script src="{{ asset('assets/js/client/medical.js') }}"></script>
 @endsection

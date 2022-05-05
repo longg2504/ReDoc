@@ -1,23 +1,57 @@
 @extends('client.layout.index')
 @section('css')
-<link rel="stylesheet" href="{{asset('/assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('/assets/css/style.css') }}">
 @endsection
 @section('content')
-    <div id="main">
-        <div class="position category-list" id="list-cms">
+    <ul class="nav nav-pills mb-3 mt-4">
+        <li class="nav-item">
+            <a class="nav-link" href="">Profile</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="">Profile</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="">Profile</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="">Profile</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="">Profile</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="pills-tabContent">
+        <h1>
+            <div class="breadcrumb"><span>Bài viết</span></div>
+        </h1>
+        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+            <div class="card-group row">
+                <div class="card col-md-12">
+                    <img class="card-img-top" data-src="holder.js/100x180/" alt="Card image cap">
+                    <div class="card-body">
+                        <h4 class="card-title">Title</h4>
+                        <p class="card-text">Text</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top" data-src="holder.js/100x180/" alt="Card image cap">
+                    <div class="card-body">
+                        <h4 class="card-title">Title</h4>
+                        <p class="card-text">Text</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+       
+    </div>
+
+    {{-- <div class="position category-list" id="list-cms">
             <div id="category-collapsible-menu">
                 <div class="category-collapsible-content collapsible-container collapsible-block collapsed">
                     <div class="nav-left collapsible-target">
                         <ul>
-                            @if (isset($categories))
-                                @foreach ($categories as $item)
-                                    <li class="collapsible-container collapsible-block collapsed">
-                                        <div class="parent-category">
-                                            <a href="/category/{{ $item->id }}">{{ $item->name }}</a>
-                                        </div>
-                                    </li>
-                                @endforeach
-                            @endif
+                            
                         </ul>
                     </div>
                     <div class="category-other collapse-trigger">
@@ -51,8 +85,7 @@
                 </div>
                 {!! $posts->links() !!}
             </div>
-        </div>
-    </div>
+        </div> --}}
 @endsection
 @section('js')
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

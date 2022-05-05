@@ -23,7 +23,7 @@
 
                                 </div>
                                 <div class="p-2">
-                                    <a><span class="font-weight-600">Thay đổi số điện thoại</span></a>
+                                    <a><span class="font-weight-600">Thay đổi thông tin</span></a>
                                 </div>
                             </div>
                             <div routerlink="/setting/change-password" class="prof-sidebar-item" tabindex="0">

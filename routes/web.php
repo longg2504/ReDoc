@@ -52,7 +52,7 @@ Route::namespace('App\Http\Controllers\Client')->group(function () {
 
 
     Route::get('/medical-check-up', 'MedicalCheckController@index')->name('client.medical-check-up');
-    Route::get('/sign-up', 'AuthController@register')->name('client.register');
+    Route::get('/sign-up', 'AuthContr oller@register')->name('client.register');
     Route::post('/sign-up', 'AuthController@postRegister')->name('client.postRegister');
     Route::get('/login', 'AuthController@login')->name('client.login');
     Route::post('/login', 'AuthController@postLogin')->name('client.postLogin');
