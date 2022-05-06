@@ -14,6 +14,6 @@ class Tags extends Model
     protected static function boot()
     {
         parent::boot();
-        static::addGlobalScope(new ActiveScope());
+        // static::addGlobalScope(new ActiveScope());
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Models\Categories;
+use App\Models\Post_tags;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Posts;
 use Illuminate\Http\Request;
@@ -13,9 +14,9 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Categories::all();
-        $posts = Posts::paginate(5);    
+        $posts = Posts::paginate(5);
         return view('client.index', compact('categories', 'posts'));
-    }   
+    }
 
     public function getByCategory($category_id) {
         $categories = Categories::all();
@@ -24,8 +25,12 @@ class HomeController extends Controller
     }
 
     public function getByPost($post_id) {
+
         $post = Posts::find($post_id);
-        return view('client.post', compact('post'));
+        $relatedPosts = Posts::where('category_id', $post->category_id)->where('id', '!=', $post_id)->limit(5)->get();
+        $relatedPostsWithTag = Post_tags::with('posts')->whereIn('tag_id', $post->tags()->pluck('tags.id')->toArray())->get();
+
+        return view('client.post', compact('post', 'relatedPosts', 'relatedPostsWithTag'));
     }
 }
 
