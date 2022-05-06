@@ -52,8 +52,9 @@ $url = url()->current();
                     Bác sĩ gần bạn
                 </a>
             </li>
-            <li class="nav-item {{ $url === route('client.medical-check-up') ? 'active' : '' }} ">
-                <a tabindex="-1" aria-disabled="true" class="nav-link text-md-center" href="/setting/change-password">
+            <li class="nav-item {{ $url === route('client.setting') ? 'active' : '' }} ">
+                <a tabindex="-1" aria-disabled="true" class="nav-link text-md-center"
+                    href="{{ route('client.setting') }}">
                     <span class="material-icons-outlined d-md-block">
                         <i class="fa fa-cog fa-nav" aria-hidden="true"></i>
                     </span>

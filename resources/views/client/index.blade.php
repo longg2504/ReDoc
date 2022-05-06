@@ -4,6 +4,12 @@
 @endsection
 @section('content')
     <style>
+        a {
+            color: black
+        }
+        a:hover {
+            color: black
+        }
         .tab {
             background-color: #fff;
         }
@@ -35,8 +41,10 @@
         }
 
         .img-post {
-            width: 20%;
+            width: 300px;
             margin-right: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
         }
 
         .content h5 {
@@ -58,26 +66,13 @@
         <div class="title tab-container"><b>Trang chủ </b><span></span></div>
         <div class="tab-container mb-1">
             <div class="row  mr-0 ml-0">
-                <a class="col col-sm col-lg-2 tab-active" href="">
-                    <div><span>Sức khỏe</span></div>
-                </a>
-
-                <a class="col col-sm col-lg-2 tab" href="">
-                    <div><span>TIn tức</span></div>
-                </a>
-                <a class="col col-sm col-lg-2 tab" href="">
-                    <div><span>TIn tức</span></div>
-                </a>
-                <a class="col col-sm col-lg-2 tab" href="">
-                    <div><span>TIn tức</span></div>
-                </a>
-                {{-- @if (isset($categories))
+                @if (isset($categories))
                     @foreach ($categories as $item)
                         <a class="col col-sm col-lg-2 tab" href="/category/{{ $item->id }}">
                             <div><span>{{ $item->name }}</span></div>
                         </a>
                     @endforeach
-                @endif --}}
+                @endif
             </div>
             <div class="tab-line"></div>
         </div>
@@ -85,19 +80,11 @@
         <div class="page">
             <div class="row mr-0 ml-0 p-2">
                 <div class="text-align b-title" style="width: 100%; margin-bottom: 10px;"><label>Bài viết</label></div>
-                <div class="col-sm-12 col-lg-12 mb-2">
-                    <img src="" class="float-left img-post"
-                        alt="" srcset="">
-                    <div class="content">
-                        <h5>{{ $item->title }}</h5>
-                        <p>{!! $item->content !!}</p>
-                    </div>
-                </div>
-                {{-- @if (isset($posts))
+                @if (isset($posts))
                     @foreach ($posts as $item)
                         <a href="/post/{{ $item->id }}">
                             <div class="col-sm-12 col-lg-12 mb-2">
-                                <img src="{{ $item->media->getMedia($item->media, 'thumb') }}" class="float-left img-post"
+                                <img src="https://photo-baomoi.bmcdn.me/2022_05_06_83_42520284/47d9481fb15d5803014c.jpg" class="float-left img-post"
                                     alt="" srcset="">
                                 <div class="content">
                                     <h5>{{ $item->title }}</h5>
@@ -106,54 +93,11 @@
                             </div>
                         </a>
                     @endforeach
-                @endif --}}
+                @endif
             </div>
-            {{-- {!! $posts->links() !!} --}}
+            {!! $posts->links() !!}
         </div>
     </div>
-
-
-
-    {{-- <div class="position category-list" id="list-cms">
-            <div id="category-collapsible-menu">
-                <div class="category-collapsible-content collapsible-container collapsible-block collapsed">
-                    <div class="nav-left collapsible-target">
-                        <ul>
-                            
-                        </ul>
-                    </div>
-                    <div class="category-other collapse-trigger">
-                        Các chuyên mục <i class="fa fa-bars fa-fw" aria-hidden="true"></i><i class="fa fa-close"
-                            aria-hidden="true"></i>
-                    </div>
-                </div>
-            </div>
-            <div id="vue-bootstrap" class="category-content">
-                <h1>
-                    <div class="breadcrumb"><span>Bài viết</span></div>
-                </h1>
-                <div class="post-list">
-                    <ul>
-                        @if (isset($posts))
-                            @foreach ($posts as $item)
-                            <li>
-                                <a href="/post/{{ $item->id }}"
-                                class="has-zoomable loaded-img"><img
-                                    alt="{{ $item->title }}"
-                                    src="{{ $item->media->getMedia($item->media, 'thumb') }}"
-                                    lazy="loaded"></a>
-                                <div class="post-content">
-                                    <h2><a href="/post/{{ $item->id }}">{{ $item->title }}</a></h2>
-                                    {!! $item->content !!}
-                                </div>
-                            </li>
-                            @endforeach
-                        @endif
-                    </ul>
-                </div>
-                {!! $posts->links() !!}
-            </div>
-        </div> --}}
 @endsection
 @section('js')
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

@@ -14,13 +14,14 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Categories::all();
-        $posts = Posts::paginate(5);
+        $posts = Posts::paginate(5);    
         return view('client.index', compact('categories', 'posts'));
-    }
+    }   
 
     public function getByCategory($category_id) {
+        $categories = Categories::all();
         $posts = Posts::where('category_id', $category_id)->paginate(5);
-        return view('client.index', compact('posts'));
+        return view('client.index', compact('posts','categories'));
     }
 
     public function getByPost($post_id) {

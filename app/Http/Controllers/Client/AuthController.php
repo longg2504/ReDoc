@@ -125,4 +125,9 @@ class AuthController extends AdminController
             return redirect()->route('top');
         }
     }
+
+
+    public function setting(){
+        return view('client.setting');
+    }
 }

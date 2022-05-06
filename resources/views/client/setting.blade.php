@@ -15,16 +15,15 @@
                             </div>
                         </div>
                         <div class="mt-3 mb-3">
-                            <div class="prof-sidebar-item " tabindex="0">
+                            <div class="prof-sidebar-item" tabindex="0" data-tab="information">
                                 <div class="p-2">
                                     <img src="/assets/img/setting-call-active.svg" class="ng-star-inserted" />
-
                                 </div>
                                 <div class="p-2">
                                     <a><span class="font-weight-600">Thay đổi thông tin</span></a>
                                 </div>
                             </div>
-                            <div  class="prof-sidebar-item prof-sidebar-item-active" tabindex="0">
+                            <div class="prof-sidebar-item prof-sidebar-item-active" tabindex="0" data-tab="password">
                                 <div class="p-2">
                                     <img src="/assets/img/setting-lock.svg" class="ng-star-inserted" />
                                 </div>
@@ -39,7 +38,7 @@
                 </div>
             </div>
             <div class="col-md-8">
-                <div class="card">
+                <div class="card card-show-content-password">
                     <div class="card-body">
                         <div class="font-weight-600">Đổi mật khẩu</div>
                         <!---->
@@ -52,14 +51,43 @@
                                             class="form-control ng-untouched ng-pristine ng-invalid" />
                                     </div>
                                     <div class="form-group">
-                                        <label>Mật khẩu mới  <span class="text-danger"> *</span></label>
-                                        <input type="text" formcontrolname="phoneNumber"
-                                            placeholder="Nhập mật khẩu mới"
+                                        <label>Mật khẩu mới <span class="text-danger"> *</span></label>
+                                        <input type="text" formcontrolname="phoneNumber" placeholder="Nhập mật khẩu mới"
                                             class="form-control ng-dirty ng-valid ng-touched" />
                                     </div>
                                     <div class="form-group">
                                         <label>Xác nhận mật khẩu mới <span class="text-danger"> *</span></label>
-                                        <input type="password" formcontrolname="password" placeholder="Xác nhận mật khẩu mới"
+                                        <input type="password" formcontrolname="password"
+                                            placeholder="Xác nhận mật khẩu mới"
+                                            class="form-control ng-dirty ng-valid ng-touched" />
+                                    </div>
+                                    <div class="form-group"><button class="btn vn-btn-success">Lưu</button></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-show-content-information d-none">
+                    <div class="card-body">
+                        <div class="font-weight-600">Thay đổi số điện thoại</div>
+                        <!---->
+                        <div class="row">
+                            <div class="mt-2 col-md-8">
+                                <form novalidate="" class="ng-invalid ng-dirty ng-touched">
+                                    <div class="form-group">
+                                        <label>Số điện thoại cũ <span class="text-danger"> *</span></label>
+                                        <input type="text" formcontrolname="username" placeholder="Nhập số điện thoại cũ"
+                                            class="form-control ng-untouched ng-pristine ng-invalid" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Số điện thoại mới <span class="text-danger"> *</span></label>
+                                        <input type="text" formcontrolname="phoneNumber"
+                                            placeholder="Nhập số điện thoại mới"
+                                            class="form-control ng-dirty ng-valid ng-touched" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Mật khẩu <span class="text-danger"> *</span></label>
+                                        <input type="password" formcontrolname="password" placeholder="Nhập mật khẩu"
                                             class="form-control ng-dirty ng-valid ng-touched" />
                                     </div>
                                     <div class="form-group"><button class="btn vn-btn-success">Lưu</button></div>
@@ -74,13 +102,29 @@
 
         <!---->
     </div>
+    <script>
+        $(document).ready(function() {
+            console.log($('.prof-sidebar-item'));
+            $('.prof-sidebar-item').click(function() {
+                $('.prof-sidebar-item').removeClass('prof-sidebar-item-active');
+                $(this).addClass('prof-sidebar-item-active');
+                if ($(this).data('tab') == 'information') {
+                    $('.card-show-content-information').removeClass('d-none');
+                    $('.card-show-content-password').addClass('d-none');
+                } else {
+                    $('.card-show-content-information').addClass('d-none');
+                    $('.card-show-content-password').removeClass('d-none');
+                }
+            });
+        });
+    </script>
     <style>
         .btn-logout {
-            background: #fff;
-            border: 1px solid #e2e2e2;
+            background: #fff !important;
+            border: 1px solid #e2e2e2 !important;
             box-sizing: border-box;
             border-radius: 8px;
-            color: #f23939;
+            color: #f23939 !important;
             font-weight: 700;
             font-size: 1rem;
         }

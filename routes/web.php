@@ -43,7 +43,6 @@ Route::prefix('ad')->namespace('App\Http\Controllers\Admin')->group(function () 
         RouteLib::generateRoute('tags', 'TagsController', 'tags');
         RouteLib::generateRoute('post-tags', 'PostTagsController', 'post-tags');
         RouteLib::generateRoute('disease-symptoms', 'DiseaseSymptomsController', 'disease-symptoms');
-
     });
 });
 
@@ -52,7 +51,7 @@ Route::namespace('App\Http\Controllers\Client')->group(function () {
 
 
     Route::get('/medical-check-up', 'MedicalCheckController@index')->name('client.medical-check-up');
-    Route::get('/sign-up', 'AuthContr oller@register')->name('client.register');
+    Route::get('/sign-up', 'AuthController@register')->name('client.register');
     Route::post('/sign-up', 'AuthController@postRegister')->name('client.postRegister');
     Route::get('/login', 'AuthController@login')->name('client.login');
     Route::post('/login', 'AuthController@postLogin')->name('client.postLogin');
@@ -65,19 +64,9 @@ Route::namespace('App\Http\Controllers\Client')->group(function () {
 
     Route::post('/matrix', 'MatrixController@index')->name('client.matrix');
 
+    Route::get('/setting', 'AuthController@setting')->name('client.setting');
 });
 
-Route::get('/list-profile', function () {
-    return view('client.list-profile');
-});
-
-Route::get('/setting/change-phone', function () {
-    return view('client.setting.change-phone');
-});
-
-Route::get('/setting/change-password', function () {
-    return view('client.setting.change-password');
-});
 
 Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderController@requestAction')
     ->name('ckfinder_connector');
