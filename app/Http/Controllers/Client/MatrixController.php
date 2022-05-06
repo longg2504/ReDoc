@@ -2,10 +2,6 @@
 
 namespace App\Http\Controllers\Client;
 
-use App\Models\Categories;
-use App\Models\Disease_symptoms;
-use App\Models\Symptoms;
-use App\Models\Posts;
 use App\Models\Drugstores;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -27,7 +23,7 @@ class MatrixController extends Controller
         ];
 
         foreach ($drugstore as $key => $value) {
-            if ($key < 2) {
+            if ($key < 5) {
                 $distance = $map->getDistanceByMatrix($request->origin, $value->address);
                 $listDrugstore[$key]['id'] = $value->id;
                 $listDrugstore[$key]['name'] = $value->name;
