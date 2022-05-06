@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html>
+@extends('client.layout.index')
 
-<head>
-
-	<title>Map</title>
-
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+@section('content')
 
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
 		integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
@@ -18,10 +10,6 @@
 		crossorigin=""></script>
 		<script src="https://cdn.jsdelivr.net/npm/polyline-encoded@0.0.9/Polyline.encoded.min.js"></script>
 
-
-</head>
-
-<body>
 	<style>
 		* {
 			padding: 0;
@@ -30,21 +18,150 @@
 	</style>
 
 	<div style="position:relative;width: 100%;height: 100vh;">
-		<div id="mapid" style="width: 100%; height: 100%;position:absolute"></div>
-		<div style="display: flex; flex-direction: column; position: absolute; z-index: 1000; top: 10%;">
-			<button style="padding: 10px; background-color: green; margin-bottom: 10px; border-radius: 5px;"
-				onclick=showPoint()>Show Point</button>
-			<button style="padding: 10px; background-color: green; border-radius: 5px;" onclick=showLine()>ShowPolyline</button>
-		</div>
-
+		<div id="mapid" style="width: 100%; height: 50%"></div>
+        <div>
+            <div>
+                <h1 id="distance_nearest">{{ $nearest["distance"] }} km</h1>
+                <h1 id="duration_nearest">{{ $nearest["duration"] }} phút</h1>
+            </div>
+            <select id="select-drugstore" style="width: 100%;">
+                <option value="">Select route</option>
+                @foreach($listDrugstore as $key => $drugstore)
+                    <option {{ $key == 0 ? 'selected' : "" }} value="{{ $key . '-' . $drugstore['distance'] . '-' . $drugstore['duration'] }}"> {{$drugstore['name']}} </option>
+                @endforeach
+            </select>
+        </div>
 	</div>
 
+@endsection
+@section('js')
 
-	<script src="js/map.js">
+    <script>
 
+        var nearest = {!! json_encode($nearest) !!};
+        var origin = {!! json_encode($origin) !!};
+        var listDrugstore = {!! json_encode($listDrugstore) !!};
 
-	</script>
+        var locations = [];
 
-</body>
+        locations.push({
+            "x": origin.longitude,
+            "y": origin.latitude,
+            "id": 1,
+            "name": "Địa chỉ của bạn",
+            "address": origin.address
+        })
 
-</html>
+        locations.push({
+            "x": nearest.longitude,
+            "y": nearest.latitude,
+            "id": 2,
+            "name": nearest.name,
+            "address": nearest.address
+        })
+
+        var mapLocations = {};
+        var markersLayer = new L.LayerGroup();
+        function onMapClick(e) {
+            var id = e.sourceTarget.options.id;
+            if (!id) return;
+        }
+
+        var mymap = L.map('mapid').setView([10.78252517522869, 106.68534799462223], 13);
+        L.tileLayer('https://maps.vietmap.vn/tm/{z}/{x}/{y}@2x.png?apikey=2a549e9d588f70590da10665c733e5c5f0f0961393c3374c', {
+            maxZoom: 17,
+            id: 'vietmap',
+            tileSize: 512,
+            zoomOffset: -1
+        }).addTo(mymap);
+        function showPoint() {
+            this.markersLayer.clearLayers();
+            for (i = 0; i < locations.length; i++) {
+                var myIcon = L.icon({
+                    iconUrl: 'images/my-icon.png',
+                    iconSize: [32, 32],
+                    iconAnchor: [16, 32],
+                    popupAnchor: [0, -32],
+                    shadowSize: [68, 95],
+                    shadowAnchor: [22, 94]
+                });
+                var marker = L.marker([locations[i].y, locations[i].x], { icon: myIcon, id: locations[i].id }).on('click', onMapClick);
+                marker.bindPopup(`
+                <table style="width:100%">
+                <tr style="margin: 10px; border: 1px solid black ;">
+                <th>ID</th>
+                <td>${locations[i].id}</td>
+                </tr>
+                <tr style="margin: 10px; border: 1px solid black">
+                <th>Name</th>
+                <td>${locations[i].name}</td>
+                </tr>
+                <tr style="margin: 10px; border: 1px solid black">
+                <th>Address</th>
+                <td>${locations[i].address}</td>
+                </tr>
+            </table>
+                `
+                )
+                markersLayer.addLayer(marker);
+
+                mapLocations[locations[i].id] = locations[i];
+            }
+            markersLayer.addTo(mymap);
+
+        }
+        function showLine(){
+
+        var myHeaders = new Headers();
+        myHeaders.append("accept", "text/plain");
+        myHeaders.append("Content-Type", "application/json");
+
+        var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+        };
+        var points=locations.map(p=>`point=${p.y},${p.x}`).join("&");
+        fetch(`https://maps.vietmap.vn/api/route?api-version=1.1&apikey=2a549e9d588f70590da10665c733e5c5f0f0961393c3374c&vehicle=car&${points}`, requestOptions)
+        .then(response => response.text())
+        .then(result =>{
+            var resRouting=JSON.parse(result);
+            console.log(resRouting);
+            var pointList=L.PolylineUtil.decode(resRouting.paths[0].points);
+            console.log(pointList);
+            var polyline  = new L.polyline(pointList,{color: 'red'}).addTo(mymap);;
+            // zoom the map to the polyline
+            mymap.fitBounds(polyline.getBounds());
+
+        } )
+        .catch(error => console.log('error', error));
+
+        }
+
+        showPoint();
+        showLine();
+
+        $("#select-drugstore").change(function(){
+            var data = $(this).val();
+            var key = data.split("-")[0];
+            var distance = data.split("-")[1];
+            var duration = data.split("-")[2];
+            locations.pop();
+            locations.push({
+                "x": listDrugstore[key].longitude,
+                "y": listDrugstore[key].latitude,
+                "id": 2,
+                "name": listDrugstore[key].name,
+                "address": listDrugstore[key].address
+            })
+            showPoint();
+            showLine();
+            $("#distance_nearest").html(distance + ' km');
+            $("#duration_nearest").html(duration + ' phút');
+        });
+
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script src="{{ asset('assets/js/client/medical.js') }}"></script>
+@endsection
