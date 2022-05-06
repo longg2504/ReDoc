@@ -67,6 +67,9 @@ Route::namespace('App\Http\Controllers\Client')->group(function () {
     Route::get('/list-drugstore', 'MatrixController@nearDrugstore')->name('client.near-drugstore');
     Route::get('/setting', 'AuthController@setting')->name('client.setting');
 });
+Route::get('/post-detail', function(){
+    return view('client.post-detail');
+});
 
 
 Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderController@requestAction')

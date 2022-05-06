@@ -2,7 +2,7 @@
 @section('css')
     <link rel="stylesheet" href="{{ asset('/assets/css/style.css') }}">
 @endsection
-@section('content')
+{{-- @section('content')
     <style>
         a {
             color: black
@@ -12,6 +12,7 @@
         }
         .tab {
             background-color: #fff;
+            border: 1px solid #ddd;
         }
 
         .tab-active,
@@ -98,15 +99,121 @@
             {!! $posts->links() !!}
         </div>
     </div>
-@endsection
-@section('js')
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
+@endsection --}}
+<style>
+    h3.title {
+        margin-top: 10px;
+        font-weight: 600;
+        border-bottom: 1px solid #e8e8e8;
+        padding: 10px 0;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    ul.list-categories li {
+        border-bottom: 1px solid #e8e8e8;
+        padding: 10px 0;
+    }
+
+    ul.list-categories li a {
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .breadcrumb .icon-title:after {
+        content: "\F054";
+        font-family: FontAwesome;
+        margin-left: 5px;
+    }
+
+    .post-list ul li {
+        list-style: none;
+        overflow: hidden;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        font-size: 13px;
+        border-bottom: 1px solid #e8e8e8;
+    }
+
+    .breadcrumb {
+        padding: 8px 15px;
+        margin-bottom: 20px;
+        list-style: none;
+        background-color: #f5f5f5;
+        border-radius: 4px;
+    }
+
+    .has-zoomable.loaded-img {
+        clear: both;
+        cursor: pointer;
+        position: relative;
+        width: auto;
+    }
+
+    .post-list ul li img {
+        float: left;
+        margin-right: 15px;
+        max-width: 260px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+</style>
+@section('content')
+    <div class="breadcrumb-vn mt-4"><label class="font-weight-600">Trang chủ</div>
+    <div class="row bg-white">
+        <div class="col-md-3">
+            <h3 class="title">Danh mục</h3>
+            <ul class="list-categories">
+                @if (isset($categories))
+                    @foreach ($categories as $item)
+                        <li>
+                            <a href="/category/{{ $item->id }}">{{ $item->name }}</a>
+                        </li>
+                    @endforeach
+                @endif
+            </ul>
+        </div>
+        <div class="col-md-9 pr-0">
+            <div class="breadcrumb">
+                <a href="/tin-tuc/" class="no-underline">Tin tức</a>
+                @if (url()->current() != route('client.index'))
+                    <span class="icon-title"></span>
+                    <span>
+                        @if (isset($nameCategory))
+                            {{ $nameCategory }}
+                        @endif
+                    </span>
+                @endif
+            </div>
+            <div class="post-list">
+                <ul>
+                    @if (isset($posts))
+                        @foreach ($posts as $post)
+                            <li><a href="/post/{{ $post->id }}" class="has-zoomable loaded-img"><img
+                                        alt="{{ $post->title }}"
+                                        src="{{ $post->media->getMedia($post->media, 'thumb') }}" lazy="loaded"></a>
+                                <div class="post-content">
+                                    <h2><a href="/post/{{ $post->id }}">{{$post->title}}</a>
+                                    </h2>
+                                    Theo thỏa thuận hợp tác với Vinmec nhằm xây dựng các Trung tâm xuất sắc (COE) về Tim
+                                    mạch và Ung
+                                    bướu đầu tiên tại Việt Nam, Đại học Pensylvania (PENN) đã cam kết kế hoạch triển khai
+                                    chiến lược
+                                    nhằm chuẩn bị nguồn nhân lực cho các chuyên khoa nói trên. Hiện nay, PENN đã cử các
+                                    chuyên gia,
+                                    bác sĩ, điều dưỡng trực tiếp làm việc theo 2 hình thức thường xuyên và luân phiên tại
+                                    Vinmec.
+                                </div>
+                            </li>
+                        @endforeach
+                    @endif
+                </ul>
+            </div>
+        </div>
+    </div>
 @endsection

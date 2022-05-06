@@ -13,19 +13,20 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Categories::all();
-        $posts = Posts::paginate(5);    
+        $posts = Posts::paginate(10);    
         return view('client.index', compact('categories', 'posts'));
     }   
 
     public function getByCategory($category_id) {
         $categories = Categories::all();
-        $posts = Posts::where('category_id', $category_id)->paginate(5);
-        return view('client.index', compact('posts','categories'));
+        $nameCategory = Categories::find($category_id)->name;
+        $posts = Posts::where('category_id', $category_id)->paginate(10);
+        return view('client.index', compact('posts','categories','nameCategory'));
     }
 
     public function getByPost($post_id) {
         $post = Posts::find($post_id);
-        return view('client.post', compact('post'));
+        return view('client.post-detail', compact('post'));
     }
 }
 
