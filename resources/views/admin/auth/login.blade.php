@@ -46,13 +46,13 @@
                             <div id="error-password" class="login__input-error w-5/6 text-theme-6 mt-2"></div>
                         </form>
                     </div>
-                    <div class="intro-x flex text-gray-700 dark:text-gray-600 text-xs sm:text-sm mt-4">
+                    {{-- <div class="intro-x flex text-gray-700 dark:text-gray-600 text-xs sm:text-sm mt-4">
                         <div class="flex items-center mr-auto">
                             <input id="remember-me" type="checkbox" class="form-check-input border mr-2">
                             <label class="cursor-pointer select-none" for="remember-me">Ghi nhớ</label>
                         </div>
                         <a href="">Quên mật khẩu?</a>
-                    </div>
+                    </div> --}}
                     <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
                         <button form="login-form" type="submit" id="btn-login"
                             class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top">Login</button>

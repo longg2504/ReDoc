@@ -7,6 +7,8 @@ use App\Models\Diseases;
 use App\Models\Symptoms;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Auth;
 
 class MedicalCheckController extends Controller
 {
@@ -15,9 +17,8 @@ class MedicalCheckController extends Controller
         return view('client.medical-check-up');
     }
 
-    public function getSymptoms(Request $request)
+    public function getSymptoms()
     {
-
         $check = Symptoms::all()->pluck('name','id');
         return response()->json($check);
     }
@@ -26,6 +27,7 @@ class MedicalCheckController extends Controller
     {
         $data = $request->all();
         $listSymptoms = explode(',', $data['listSymptoms']);
+        $user = Auth::user();
 
         $preCheck = Disease_symptoms::with('diseases')->where('symptom_id', $listSymptoms[0])->get();
         unset($listSymptoms[0]);
@@ -45,7 +47,12 @@ class MedicalCheckController extends Controller
         foreach ($preCheck as $value) {
 
             $check[] = $value->diseases;
-            $prescription[] = $value->diseases->prescriptions()->with('medicines', 'diseases')->get();
+            if(Auth::check()) {
+                $prescription[] = $value->diseases->prescriptions()->with('medicines', 'diseases')->where('age', '<=', $user->age)->get();
+            } else {
+                $prescription[] = $value->diseases->prescriptions()->with('medicines', 'diseases')->get();
+            }
+
         }
 
         return response()->json($prescription);
@@ -58,6 +65,13 @@ class MedicalCheckController extends Controller
         $symptoms = $disease->symptoms()->get();
         $prescription = $disease->prescriptions()->with('medicines')->get();
         $user = auth()->user();
+
+        if (!Auth::check()) {
+            Alert::warning('Hãy login để có thế tìm được nhà thuốc gần bạn nhất!')
+            ->showCancelButton()
+            ->showConfirmButton()
+            ->autoClose(false);
+        }
 
         return view('client.diseases-detail', compact('disease', 'symptoms', 'prescription', 'user'));
     }

@@ -120,8 +120,10 @@ class AuthController extends AdminController
             Auth::logout();
 
             Alert::success('success', trans('admin.logout_success'));
-            return redirect()->route('top');
+            return redirect()->route('client.index');
         }
+
+        return redirect()->route('client.index');
     }
 
 

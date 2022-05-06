@@ -1,9 +1,14 @@
 @php
+
 if (is_array($selects)) {
     $data = $selects;
     $type = 'array';
 } else {
-    $data = $selects->select('id', 'name')->get();
+    try {
+        $data = $selects->select('id', 'name')->get();
+    } catch (\Exception $e) {
+        $data = $selects->select('id', 'title')->get();
+    }
     $type = 'object';
 }
 @endphp
@@ -18,7 +23,7 @@ if (is_array($selects)) {
                     @foreach ($data as $item)
                         <option value="{{ $item->id }}"
                             {{ !empty($value) ? ($value == $item->id ? 'selected' : '') : (old($name) == "$item->id" ? 'selected' : '') }}>
-                            {{ $item->name }}
+                            {{ $item->name ? $item->name : $item->title }}
                         </option>
                     @endforeach
                 @endif
