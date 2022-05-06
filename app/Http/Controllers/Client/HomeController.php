@@ -28,7 +28,7 @@ class HomeController extends Controller
 
         $post = Posts::find($post_id);
         $relatedPosts = Posts::where('category_id', $post->category_id)->where('id', '!=', $post_id)->limit(5)->get();
-        $relatedPostsWithTag = Post_tags::with('posts')->whereIn('tag_id', $post->tags()->pluck('tags.id')->toArray())->get();
+        $relatedPostsWithTag = Post_tags::with('posts')->whereIn('tag_id', $post->tags()->pluck('tags.id')->toArray())->limit(5)->get();
 
         return view('client.post', compact('post', 'relatedPosts', 'relatedPostsWithTag'));
     }
