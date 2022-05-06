@@ -21,7 +21,7 @@
 
                                 </div>
                                 <div class="p-2">
-                                    <a><span class="font-weight-600">Thay đổi thông tin</span></a>
+                                    <a href="{{ route('client.change-info') }}"><span class="font-weight-600">Thay đổi thông tin</span></a>
                                 </div>
                             </div>
                             <div  class="prof-sidebar-item prof-sidebar-item-active" tabindex="0">
@@ -45,21 +45,22 @@
                         <!---->
                         <div class="row">
                             <div class="mt-2 col-md-8">
-                                <form novalidate="" class="ng-invalid ng-dirty ng-touched">
+                                <form action="{{ route('client.update-password') }}" method="POST" novalidate="" class="ng-invalid ng-dirty ng-touched">
+                                    @csrf
                                     <div class="form-group">
                                         <label>Mật khẩu hiện tại <span class="text-danger"> *</span></label>
-                                        <input type="text" formcontrolname="username" placeholder="Nhập mật khẩu hiện tại"
+                                        <input type="password" name="oldPassword" formcontrolname="username" placeholder="Nhập mật khẩu hiện tại"
                                             class="form-control ng-untouched ng-pristine ng-invalid" />
                                     </div>
                                     <div class="form-group">
                                         <label>Mật khẩu mới  <span class="text-danger"> *</span></label>
-                                        <input type="text" formcontrolname="phoneNumber"
+                                        <input type="password" name="password" formcontrolname="phoneNumber"
                                             placeholder="Nhập mật khẩu mới"
                                             class="form-control ng-dirty ng-valid ng-touched" />
                                     </div>
                                     <div class="form-group">
                                         <label>Xác nhận mật khẩu mới <span class="text-danger"> *</span></label>
-                                        <input type="password" formcontrolname="password" placeholder="Xác nhận mật khẩu mới"
+                                        <input type="password" name="confirmPassword" formcontrolname="password" placeholder="Xác nhận mật khẩu mới"
                                             class="form-control ng-dirty ng-valid ng-touched" />
                                     </div>
                                     <div class="form-group"><button class="btn vn-btn-success">Lưu</button></div>

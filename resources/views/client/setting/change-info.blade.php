@@ -31,7 +31,7 @@
                                     <img src="/assets/img/setting-lock.svg" class="ng-star-inserted" />
                                 </div>
                                 <div class="p-2">
-                                    <a><span class="font-weight-600">Đổi mật khẩu</span></a>
+                                    <a href="{{ route('client.change-password') }}"><span class="font-weight-600">Đổi mật khẩu</span></a>
                                 </div>
                             </div>
                         </div>
@@ -42,26 +42,33 @@
             </div>
             <div class="col-md-8">
                 <div class="card">
+                    @if (isset($user))
                     <div class="card-body">
-                        <div class="font-weight-600">Thay đổi số điện thoại</div>
+                        <div class="font-weight-600">Thay đổi thông tin cá nhân</div>
                         <!---->
                         <div class="row">
                             <div class="mt-2 col-md-8">
-                                <form novalidate="" class="ng-invalid ng-dirty ng-touched">
+                                <form novalidate="" class="ng-invalid ng-dirty ng-touched" action="{{ route('client.update-info') }}" method="POST">
+                                    @csrf
                                     <div class="form-group">
-                                        <label>Số điện thoại cũ <span class="text-danger"> *</span></label>
-                                        <input type="text" formcontrolname="username" placeholder="Nhập số điện thoại cũ"
+                                        <label>Tên người dùng <span class="text-danger"> *</span></label>
+                                        <input type="text" name="username" formcontrolname="username" placeholder="Nhập tên người dùng" value="{{$user->username}}"
                                             class="form-control ng-untouched ng-pristine ng-invalid" />
                                     </div>
                                     <div class="form-group">
-                                        <label>Số điện thoại mới <span class="text-danger"> *</span></label>
-                                        <input type="text" formcontrolname="phoneNumber"
-                                            placeholder="Nhập số điện thoại mới"
+                                        <label>Email <span class="text-danger"> *</span></label>
+                                        <input type="text" name="email" formcontrolname="email" value="{{$user->email}}"
+                                            placeholder="Nhập email"
                                             class="form-control ng-dirty ng-valid ng-touched" />
                                     </div>
                                     <div class="form-group">
-                                        <label>Mật khẩu <span class="text-danger"> *</span></label>
-                                        <input type="password" formcontrolname="password" placeholder="Nhập mật khẩu"
+                                        <label>Địa chỉ <span class="text-danger"> *</span></label>
+                                        <input type="text" name="address" formcontrolname="address" placeholder="Nhập địa chỉ" value="{{$user->address}}"
+                                            class="form-control ng-dirty ng-valid ng-touched" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Tuổi <span class="text-danger"> *</span></label>
+                                        <input type="number" name="age" formcontrolname="age" placeholder="Nhập tuổi" value="{{$user->age}}"
                                             class="form-control ng-dirty ng-valid ng-touched" />
                                     </div>
                                     <div class="form-group"><button class="btn vn-btn-success">Lưu</button></div>
@@ -69,6 +76,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

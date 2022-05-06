@@ -50,7 +50,6 @@ Route::prefix('ad')->namespace('App\Http\Controllers\Admin')->group(function () 
 // Web
 Route::namespace('App\Http\Controllers\Client')->group(function () {
 
-
     Route::get('/medical-check-up', 'MedicalCheckController@index')->name('client.medical-check-up');
     Route::get('/sign-up', 'AuthContr oller@register')->name('client.register');
     Route::post('/sign-up', 'AuthController@postRegister')->name('client.postRegister');
@@ -60,23 +59,18 @@ Route::namespace('App\Http\Controllers\Client')->group(function () {
     Route::get('/', 'HomeController@index')->name('client.index');
     Route::get('/category/{category_id}', 'HomeController@getByCategory')->name('client.category');
     Route::get('/post/{post_id}', 'HomeController@getByPost')->name('client.post');
-
     Route::get('/diseases/{id}', 'MedicalCheckController@showDisease')->name('client.showDisease');
-
     Route::post('/matrix', 'MatrixController@index')->name('client.matrix');
 
-});
+    Route::get('/setting/change-password', 'ChangeInfoController@changePassword')->name('client.change-password');
+    Route::get('/setting/change-info', 'ChangeInfoController@changeInfo')->name('client.change-info');
+    Route::post('/setting/change-info', 'ChangeInfoController@updateInfo')->name('client.update-info');
+    Route::post('/setting/change-password', 'ChangeInfoController@updatePassword')->name('client.update-password');
+    Route::get('/list-profile', function () {
+        return view('client.list-profile');
+    });
 
-Route::get('/list-profile', function () {
-    return view('client.list-profile');
-});
 
-Route::get('/setting/change-phone', function () {
-    return view('client.setting.change-phone');
-});
-
-Route::get('/setting/change-password', function () {
-    return view('client.setting.change-password');
 });
 
 Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderController@requestAction')
