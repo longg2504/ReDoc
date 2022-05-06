@@ -12,11 +12,13 @@ use App\Services\CalculateDistanceService;
 
 class MatrixController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // $getDistanceByMatrix = new CalculateDistanceService('139 xuan hong', '17a cong hoa');
-        // dd($getDistanceByMatrix);
-        dd(123);
+        $map = new CalculateDistanceService();
+        $origin = $map->getGeoCodeFromAddress($request->origin);
+        $destination = $map->getGeoCodeFromAddress($request->destination);
+
+        return view('client.matrix', compact('origin', 'destination'));
     }
 }
 
