@@ -40,13 +40,26 @@ if (!isset($data)) {
                     <div class="post__content tab-content">
                         <div id="content" class="tab-pane p-5 active" role="tabpanel" aria-labelledby="content-tab">
                             <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mb-5">
-                                @foreach ($formFields as $k => $tab)
-                                {{-- {{ dd(@$tab['update']) }} --}}
-                                    @if (!@$tab['right'] && ( @$tab['update'] || is_null(@$tab['update']) ))
-                                        {!! Form::show($tab, $data) !!}
-                                    @endif
+                                @php
+                                    $countData = count(array_filter($formFields, function ($item) {
+                                        return !isset($item['right']);
+                                    }));
+                                @endphp
 
-                                @endforeach
+                                @if ($countData > 1)
+                                    @foreach ($formFields as $k => $tab)
+                                        @if (!@$tab['right'] && ( @$tab['update'] || is_null(@$tab['update']) ))
+                                            {!! Form::show($tab, $data) !!}
+                                        @endif
+                                    @endforeach
+                                @else
+                                    @foreach ($formFields as $k => $tab)
+                                        @if (@$tab['right'])
+                                            {!! Form::show($tab, $data) !!}
+                                        @endif
+                                    @endforeach
+                                @endif
+
                             </div>
                         </div>
                     </div>
@@ -58,13 +71,14 @@ if (!isset($data)) {
 
                     <div class="mt-3">
 
-                        @foreach ($formFields as $k => $tab)
+                        @if ($countData > 1)
+                            @foreach ($formFields as $k => $tab)
+                                @if (@$tab['right'])
+                                    {!! Form::show($tab, $data) !!}
+                                @endif
+                            @endforeach
+                        @endif
 
-                            @if (@$tab['right'])
-                                {!! Form::show($tab, $data) !!}
-                            @endif
-
-                        @endforeach
                     </div>
                     <x-button-active active="1" />
                 </div>
