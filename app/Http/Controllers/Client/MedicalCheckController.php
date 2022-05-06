@@ -17,9 +17,8 @@ class MedicalCheckController extends Controller
         return view('client.medical-check-up');
     }
 
-    public function getSymptoms(Request $request)
+    public function getSymptoms()
     {
-
         $check = Symptoms::all()->pluck('name','id');
         return response()->json($check);
     }
@@ -28,6 +27,7 @@ class MedicalCheckController extends Controller
     {
         $data = $request->all();
         $listSymptoms = explode(',', $data['listSymptoms']);
+        $user = Auth::user();
 
         $preCheck = Disease_symptoms::with('diseases')->where('symptom_id', $listSymptoms[0])->get();
         unset($listSymptoms[0]);
@@ -47,7 +47,12 @@ class MedicalCheckController extends Controller
         foreach ($preCheck as $value) {
 
             $check[] = $value->diseases;
-            $prescription[] = $value->diseases->prescriptions()->with('medicines', 'diseases')->get();
+            if(Auth::check()) {
+                $prescription[] = $value->diseases->prescriptions()->with('medicines', 'diseases')->where('age', '<=', $user->age)->get();
+            } else {
+                $prescription[] = $value->diseases->prescriptions()->with('medicines', 'diseases')->get();
+            }
+
         }
 
         return response()->json($prescription);
