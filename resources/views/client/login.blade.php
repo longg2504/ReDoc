@@ -64,8 +64,8 @@
                                 <!---->
                                 Đăng nhập
                             </button>
-                            <button type="button" routerlink="/sign-up"
-                                class="btn btn-block btn-lg vn-btn-outline-success mt-3" tabindex="0">Đăng ký</button>
+                            <a href="/sign-up"
+                                class="btn btn-block btn-lg vn-btn-outline-success mt-3" tabindex="0">Đăng ký</a>
                         </div>
                     </form>
                     <div class="text-center mt-4">

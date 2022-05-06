@@ -17,7 +17,8 @@ class DiseasesFactory extends Factory
         return [
             "name" => $this->faker->name,
             "age" => $this->faker->randomDigit,
-            "media_id" => Media::all()->random()->id
+            "media_id" => Media::all()->random()->id,
+            "description" => $this->faker->text,
         ];
     }
 }

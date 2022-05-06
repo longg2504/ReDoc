@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="{{ asset('assets/css/index.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/common.css') }}">
 
+    <link href='https://vietmaps.vn/vietmap-gl-js/v1.0.0/vietmap-gl.css' rel='stylesheet' />
+    <link href="https://vietmaps.vn/vietmap-gl-js/plugins/vietmaps-gl-directions/v1.0.0/vietmap-gl-directions.css" />
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script defer
         src="https://maps.googleapis.com/maps/api/js?libraries=places&language=vi&key=AIzaSyAfPMMozZ7nfUi9jG9IidOMx2Bh16h1x3E"
@@ -23,6 +26,10 @@
     <script src="{{ asset('js/sweetalert.all.js') }}"></script>
     @yield('css')
     <style>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 680fd5b8746c19bf5803e58999cbef26c5d12435
         #loader-background {
             position: fixed;
             top: 0;

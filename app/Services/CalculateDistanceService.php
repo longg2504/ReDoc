@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 
 class CalculateDistanceService
 {
+    // const VM_API_KEY = '2a549e9d588f70590da10665c733e5c5f0f0961393c3374c';
     const VM_API_KEY = 'b351baf1a7da8fcbb75a4a480e849ae4a8b7e48d1d1ff046';
     const ROUTE_API_URL = 'https://maps.vietmap.vn/api/route';
     const SEARCH_API_URL = 'https://maps.vietmap.vn/api/search';
@@ -61,10 +62,9 @@ class CalculateDistanceService
     public function getDistanceByMatrix($addressFrom, $addressTo): ?array
     {
         $geocodeFrom = $this->getGeoCodeFromAddress($addressFrom);
-        dd($geocodeFrom);
         $geocodeTo = $this->getGeoCodeFromAddress($addressTo);
 
-        $response = Http::get(self::ROUTE_API_URL, "apikey=" . self::VM_API_KEY . "&point=" . $geocodeFrom . "&point=" . $geocodeTo . "&api-version=1.1")->json();
+        $response = Http::get(self::ROUTE_API_URL . "?apikey=" . self::VM_API_KEY . "&point=" . $geocodeFrom . "&point=" . $geocodeTo . "&api-version=1.1&vehicle=bike")->json();
 
         if ($response["code"] == "OK") {
 
@@ -77,8 +77,8 @@ class CalculateDistanceService
                     $distance = $paths[0]["distance"];
                     $duration = $paths[0]["time"];
 
-                    $distance = ceil($distance / 1000); // convert meter to kilometer
-                    $duration = ceil($duration / 60 / 1000) . ' phút'; // convert seconds to minute
+                    $distance = round($distance / 1000, 2 ); // convert meter to kilometer
+                    $duration = round($duration / 60 / 1000, 2); // convert seconds to minute
 
                     return [$distance, $duration];
                 }

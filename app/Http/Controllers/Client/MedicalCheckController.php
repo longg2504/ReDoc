@@ -57,7 +57,8 @@ class MedicalCheckController extends Controller
         $disease = Diseases::find($id);
         $symptoms = $disease->symptoms()->get();
         $prescription = $disease->prescriptions()->with('medicines')->get();
+        $user = auth()->user();
 
-        return view('client.diseases-detail', compact('disease', 'symptoms', 'prescription'));
+        return view('client.diseases-detail', compact('disease', 'symptoms', 'prescription', 'user'));
     }
 }

@@ -63,7 +63,7 @@ Route::namespace('App\Http\Controllers\Client')->group(function () {
 
     Route::get('/diseases/{id}', 'MedicalCheckController@showDisease')->name('client.showDisease');
 
-    Route::get('/matrix', 'MatrixController@index')->name('client.matrix');
+    Route::post('/matrix', 'MatrixController@index')->name('client.matrix');
 
 });
 
