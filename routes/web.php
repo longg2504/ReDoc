@@ -61,6 +61,10 @@ Route::namespace('App\Http\Controllers\Client')->group(function () {
     Route::get('/diseases/{id}', 'MedicalCheckController@showDisease')->name('client.showDisease');
     Route::post('/matrix', 'MatrixController@index')->name('client.matrix');
 
+
+    Route::post('/setting/change-info', 'ChangeInfoController@updateInfo')->name('client.update-info');
+    Route::post('/setting/change-password', 'ChangeInfoController@updatePassword')->name('client.update-password');
+    Route::get('/list-drugstore', 'MatrixController@nearDrugstore')->name('client.near-drugstore');
     Route::get('/setting', 'AuthController@setting')->name('client.setting');
 });
 

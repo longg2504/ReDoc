@@ -126,6 +126,7 @@ class AuthController extends AdminController
 
 
     public function setting(){
-        return view('client.setting');
+        $user = Auth::user();
+        return view('client.setting', compact('user'));
     }
 }
