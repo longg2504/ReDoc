@@ -26,10 +26,6 @@
     <script src="{{ asset('js/sweetalert.all.js') }}"></script>
     @yield('css')
     <style>
-<<<<<<< HEAD
-=======
-
->>>>>>> 680fd5b8746c19bf5803e58999cbef26c5d12435
         #loader-background {
             position: fixed;
             top: 0;

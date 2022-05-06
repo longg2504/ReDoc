@@ -7,6 +7,8 @@ use App\Models\Diseases;
 use App\Models\Symptoms;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Auth;
 
 class MedicalCheckController extends Controller
 {
@@ -58,6 +60,13 @@ class MedicalCheckController extends Controller
         $symptoms = $disease->symptoms()->get();
         $prescription = $disease->prescriptions()->with('medicines')->get();
         $user = auth()->user();
+
+        if (!Auth::check()) {
+            Alert::warning('Hãy login để có thế tìm được nhà thuốc gần bạn nhất!')
+            ->showCancelButton()
+            ->showConfirmButton()
+            ->autoClose(false);
+        }
 
         return view('client.diseases-detail', compact('disease', 'symptoms', 'prescription', 'user'));
     }

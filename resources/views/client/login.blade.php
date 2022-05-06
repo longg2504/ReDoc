@@ -54,11 +54,11 @@
                                     type="password" />
                             </div>
                         </div>
-                        <div class="form-group d-flex justify-content-between">
+                        {{-- <div class="form-group d-flex justify-content-between">
                             <div class="d-inline-flex remember-cb">
                             </div>
                             <div class="font-weight-600"><a href="">Quên mật khẩu?</a></div>
-                        </div>
+                        </div> --}}
                         <div class="form-group mt-4">
                             <button type="submit" class="btn btn-block btn-lg vn-btn-success">
                                 <!---->
@@ -68,9 +68,9 @@
                                 class="btn btn-block btn-lg vn-btn-outline-success mt-3" tabindex="0">Đăng ký</a>
                         </div>
                     </form>
-                    <div class="text-center mt-4">
+                    {{-- <div class="text-center mt-4">
                         <p class="font-weight-600"><a href="">Đăng ký khám ngay</a></p>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
