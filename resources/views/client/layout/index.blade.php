@@ -23,7 +23,6 @@
     <script src="{{ asset('js/sweetalert.all.js') }}"></script>
     @yield('css')
     <style>
-        
         #loader-background {
             position: fixed;
             top: 0;
@@ -33,6 +32,7 @@
             background-color: rgb(227, 238, 238);
             z-index: 1000000000000;
         }
+
         #loader {
             position: absolute;
             left: 50%;
@@ -102,12 +102,16 @@
             }
         }
 
+        body {
+            background-color: #f6f6f6;
+        }
+
     </style>
 </head>
 
 <body onload="loadFunction()">
     <div id="loader-background">
-        <div id="loader" ></div>
+        <div id="loader"></div>
     </div>
     @include('sweetalert::alert')
     @include('client.includes.header')
@@ -126,7 +130,6 @@
         function showPage() {
             document.getElementById("loader-background").style.display = "none";
             document.getElementById("loader").style.display = "none";
-            document.getElementById("myDiv").style.display = "block";
         }
     </script>
 

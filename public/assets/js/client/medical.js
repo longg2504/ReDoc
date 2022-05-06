@@ -1,5 +1,3 @@
-
-
 $(document).ready(function () {
     var dataSelect2;
     $('.diseases').hide();
@@ -65,7 +63,6 @@ $(document).ready(function () {
                 }
             },
         });
-
     });
 });
 
