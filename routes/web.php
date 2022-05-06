@@ -49,7 +49,6 @@ Route::prefix('ad')->namespace('App\Http\Controllers\Admin')->group(function () 
 // Web
 Route::namespace('App\Http\Controllers\Client')->group(function () {
 
-
     Route::get('/medical-check-up', 'MedicalCheckController@index')->name('client.medical-check-up');
     Route::get('/sign-up', 'AuthController@register')->name('client.register');
     Route::post('/sign-up', 'AuthController@postRegister')->name('client.postRegister');
@@ -59,9 +58,7 @@ Route::namespace('App\Http\Controllers\Client')->group(function () {
     Route::get('/', 'HomeController@index')->name('client.index');
     Route::get('/category/{category_id}', 'HomeController@getByCategory')->name('client.category');
     Route::get('/post/{post_id}', 'HomeController@getByPost')->name('client.post');
-
     Route::get('/diseases/{id}', 'MedicalCheckController@showDisease')->name('client.showDisease');
-
     Route::post('/matrix', 'MatrixController@index')->name('client.matrix');
 
     Route::get('/setting', 'AuthController@setting')->name('client.setting');

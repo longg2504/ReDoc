@@ -45,11 +45,11 @@ $url = url()->current();
                 </a>
             </li>
             <li class="nav-item">
-                <a tabindex="-1" aria-disabled="true" class="nav-link text-md-center" href="/list-profile">
+                <a tabindex="-1" aria-disabled="true" class="nav-link text-md-center" href="/list-drugstore">
                     <span class="material-icons-outlined d-md-block">
                         <i class="fa fa-user-md fa-nav" aria-hidden="true"></i>
                     </span>
-                    Bác sĩ gần bạn
+                    Hiệu thuốc gần bạn
                 </a>
             </li>
             <li class="nav-item {{ $url === route('client.setting') ? 'active' : '' }} ">

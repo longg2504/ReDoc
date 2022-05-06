@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Models\Categories;
-use App\Models\Disease_symptoms;
-use App\Models\Symptoms;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Posts;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;

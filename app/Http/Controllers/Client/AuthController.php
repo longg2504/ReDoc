@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Client;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Client\Auth\LoginRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -86,7 +84,7 @@ class AuthController extends AdminController
 
             $validator = Validator::make($request->all(), [
                 'password' => 'required',
-                'email' => 'required|email'
+                'username' => 'required'
             ]);
 
             if ($validator->fails()) {
@@ -95,9 +93,9 @@ class AuthController extends AdminController
                 return back();
             }
 
-            if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password])) {
+            if (Auth::guard('web')->attempt(['username' => $request->username, 'password' => $request->password])) {
 
-                $user = User::where('email', $request->email)->first();
+                $user = User::where('username', $request->username)->first();
 
                 Auth::guard('web')->login($user);
                 Alert::success('success', trans('admin.login_success'));

@@ -42,8 +42,8 @@
                     <form action="{{ route('client.postLogin') }}" method='post' class="ng-untouched ng-pristine ng-valid">
                         @csrf
                         <div class="form-group">
-                            <label>Email</label>
-                            <input name="email" placeholder="Nhập email" type="text" formcontrolname="email"
+                            <label>Tên người dùng</label>
+                            <input name="username" placeholder="Nhập tên người dùng" type="text" formcontrolname="username"
                                 class="form-control input-custom ng-untouched ng-pristine ng-valid" />
                         </div>
                         <div class="form-group">
