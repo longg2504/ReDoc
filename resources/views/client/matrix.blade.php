@@ -74,9 +74,11 @@
             tileSize: 512,
             zoomOffset: -1
         }).addTo(mymap);
+
         function showPoint() {
             this.markersLayer.clearLayers();
             for (i = 0; i < locations.length; i++) {
+
                 var myIcon = L.icon({
                     iconUrl: 'images/my-icon.png',
                     iconSize: [32, 32],
@@ -85,24 +87,26 @@
                     shadowSize: [68, 95],
                     shadowAnchor: [22, 94]
                 });
+
                 var marker = L.marker([locations[i].y, locations[i].x], { icon: myIcon, id: locations[i].id }).on('click', onMapClick);
+
                 marker.bindPopup(`
-                <table style="width:100%">
-                <tr style="margin: 10px; border: 1px solid black ;">
-                <th>ID</th>
-                <td>${locations[i].id}</td>
-                </tr>
-                <tr style="margin: 10px; border: 1px solid black">
-                <th>Name</th>
-                <td>${locations[i].name}</td>
-                </tr>
-                <tr style="margin: 10px; border: 1px solid black">
-                <th>Address</th>
-                <td>${locations[i].address}</td>
-                </tr>
-            </table>
-                `
-                )
+                    <table style="width:100%">
+                        <tr style="margin: 10px; border: 1px solid black ;">
+                        <th>ID</th>
+                        <td>${locations[i].id}</td>
+                        </tr>
+                        <tr style="margin: 10px; border: 1px solid black">
+                        <th>Name</th>
+                        <td>${locations[i].name}</td>
+                        </tr>
+                        <tr style="margin: 10px; border: 1px solid black">
+                        <th>Address</th>
+                        <td>${locations[i].address}</td>
+                        </tr>
+                    </table>
+                `);
+
                 markersLayer.addLayer(marker);
 
                 mapLocations[locations[i].id] = locations[i];
@@ -117,9 +121,9 @@
         myHeaders.append("Content-Type", "application/json");
 
         var requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-        redirect: 'follow'
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
         };
         var points=locations.map(p=>`point=${p.y},${p.x}`).join("&");
         fetch(`https://maps.vietmap.vn/api/route?api-version=1.1&apikey=2a549e9d588f70590da10665c733e5c5f0f0961393c3374c&vehicle=car&${points}`, requestOptions)
@@ -134,9 +138,7 @@
             mymap.fitBounds(polyline.getBounds());
 
         } )
-        .catch(error => console.log('error', error));
-
-        }
+        .catch(error => console.log('error', error))}
 
         showPoint();
         showLine();
