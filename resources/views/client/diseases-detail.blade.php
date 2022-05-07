@@ -1,39 +1,87 @@
 @extends('client.layout.index')
 @section('content')
-
     <style>
-        .no-padding {padding:0 !important;}
+        .no-padding {
+            padding: 0 !important;
+        }
 
         .add-padding {
-            padding: .625em 2em; # padding as you need according your styles
-            display: inline-block;
+            padding: .625em 2em;
+            # padding as you need according your styles display: inline-block;
         }
 
         a {
             text-decoration: none !important;
         }
+
+        .breadcrumb {
+            margin: 0 -15px;
+        }
+
     </style>
+    <div class="breadcrumb mt-4"><label class="font-weight-600">Chi tiết về bệnh</label>
+        <span>{{ $disease->name }}</span>
+    </div>
 
-    <h3>{{ $disease->name }}</h3>
+    <div class="row bg-white">
+        <div class="content col-xs-12 col-md-12 no-paddings-sm mt-1">
+            <h3>{{ $disease->name }}</h3>
+        </div>
 
-    @if (isset($user->address))
-        <form action="{{ route('client.matrix') }}" method="post">
-            @csrf
-            <input type="hidden" name="origin" value="{{ $user->address }}">
-            <button type="submit" class="btn btn-primary">Nhà Thuốc gần bạn</button>
-        </form>
-    @endif
+        <div class="content col-xs-12 col-md-12 no-paddings-sm mt-1">
+            <p>{!! $disease->description !!}</p>
+        </div>
 
+        <div class="content col-xs-12 col-md-12 no-paddings-sm mt-1">
+            <h5>Triệu chứng</h5>
+            <ul>
+                @foreach ($symptoms as $symptom)
+                    <li>{{ $symptom->name }}</li>
+                @endforeach
+            </ul>
+        </div>
+
+        <div class="content col-xs-12 col-md-12 no-paddings-sm mt-1">
+            <h5>Đơn thuốc</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">Tên thuốc</th>
+                        <th scope="col">Số lượng</th>
+                        <th scope="col">Liều lượng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($prescription as $key => $item)
+                        <tr>
+                            <th scope="row">{{ $key + 1 }}</th>
+                            <td>{{ $item->medicines->name }}</td>
+                            <td>{{ $item->amount }}</td>
+                            <td>{{ $item->dosage }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+
+        </div>
+        @if (isset($user->address))
+            <form action="{{ route('client.matrix') }}" method="post">
+                @csrf
+                <input type="hidden" name="origin" value="{{ $user->address }}">
+                <button type="submit" class="btn btn-primary">Nhà Thuốc gần bạn</button>
+            </form>
+        @endif
+    </div>
 @endsection
 
 @section('js')
     <script>
-        $(document).ready(function () {
-            $('.swal2-confirm').click(function () {
+        $(document).ready(function() {
+            $('.swal2-confirm').click(function() {
                 console.log('click');
                 location.href = '{{ route('client.login') }}';
             });
         });
     </script>
 @endsection
-

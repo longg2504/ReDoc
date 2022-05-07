@@ -72,6 +72,7 @@ class MedicalCheckController extends Controller
             ->showConfirmButton()
             ->autoClose(false);
         }
+        // dd($prescription);
 
         return view('client.diseases-detail', compact('disease', 'symptoms', 'prescription', 'user'));
     }

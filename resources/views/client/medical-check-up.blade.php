@@ -13,7 +13,7 @@
             <div class="card-body">
                 <h6 class="card-title">Tìm kiếm bệnh theo triệu chứng</h6>
                 <div class="row select-symptom mt-4 mb-4 ">
-                    <div class="col-md-8  pr-0">
+                    <div class="col-md-10  pr-0">
                         <select name="symptoms[]"
                             class="js-example-placeholder-multiple js-states form-control choice-symptoms"
                             multiple="multiple"></select>
@@ -28,14 +28,11 @@
                        
                     </div>
                 </div>
-
                 <div class="not-diseases">
                     <div class="alert alert-danger" role="alert">
                         <strong>Không tìm thấy bệnh nào theo các triệu chứng trên</strong>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
