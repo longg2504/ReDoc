@@ -28,6 +28,7 @@ class MedicalCheckController extends Controller
         $data = $request->all();
         $listSymptoms = explode(',', $data['listSymptoms']);
         $user = Auth::user();
+        $prescription = [];
 
         $preCheck = Disease_symptoms::with('diseases')->where('symptom_id', $listSymptoms[0])->get();
         unset($listSymptoms[0]);
