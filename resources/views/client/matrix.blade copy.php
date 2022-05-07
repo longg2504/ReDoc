@@ -20,8 +20,15 @@
 	<div style="position:relative;width: 100%;height: 100vh;">
 		<div id="mapid" style="width: 100%; height: 50%"></div>
         <div>
+            {{-- <div>
+                <h1 id="distance_nearest">{{ $nearest["distance"] }} km</h1>
+                <h1 id="duration_nearest">{{ $nearest["duration"] }} phút</h1>
+            </div> --}}
             <select id="select-drugstore" style="width: 100%;">
                 <option value="">Select route</option>
+                {{-- @foreach($listDrugstore as $key => $drugstore)
+                    <option {{ $key == 0 ? 'selected' : "" }} value="{{ $key . '-' . $drugstore['distance'] . '-' . $drugstore['duration'] }}"> {{$drugstore['name']}} </option>
+                @endforeach --}}
             </select>
         </div>
 	</div>
@@ -30,6 +37,28 @@
 @section('js')
 
     <script>
+
+        // var nearest = {!! json_encode($nearest) !!};
+        // var origin = {!! json_encode($origin) !!};
+        // var listDrugstore = {!! json_encode($listDrugstore) !!};
+
+        // var locations = [];
+
+        // locations.push({
+        //     "x": origin.longitude,
+        //     "y": origin.latitude,
+        //     "id": 1,
+        //     "name": "Địa chỉ của bạn",
+        //     "address": origin.address
+        // })
+
+        // locations.push({
+        //     "x": nearest.longitude,
+        //     "y": nearest.latitude,
+        //     "id": 2,
+        //     "name": nearest.name,
+        //     "address": nearest.address
+        // })
 
         var locations = [
             { "x": 106.68534799462223, "y": 10.78252517522869, "id": 1, "name": "Điểm 1", "address": "địa chỉ 1" },
@@ -43,6 +72,7 @@
             if (!id) return;
         }
 
+        // var mymap = L.map('mapid').setView([origin.latitude, origin.longitude], 13);
         var mymap = L.map('mapid').setView([10.78252517522869, 106.68534799462223], 13);
         L.tileLayer('https://maps.vietmap.vn/tm/{z}/{x}/{y}@2x.png?apikey=b351baf1a7da8fcbb75a4a480e849ae4a8b7e48d1d1ff046', {
             maxZoom: 17,
@@ -118,6 +148,25 @@
 
         showPoint();
         showLine();
+
+        // $("#select-drugstore").change(function(){
+        //     var data = $(this).val();
+        //     var key = data.split("-")[0];
+        //     var distance = data.split("-")[1];
+        //     var duration = data.split("-")[2];
+        //     locations.pop();
+        //     locations.push({
+        //         "x": listDrugstore[key].longitude,
+        //         "y": listDrugstore[key].latitude,
+        //         "id": 2,
+        //         "name": listDrugstore[key].name,
+        //         "address": listDrugstore[key].address
+        //     })
+        //     showPoint();
+        //     showLine();
+        //     $("#distance_nearest").html(distance + ' km');
+        //     $("#duration_nearest").html(duration + ' phút');
+        // });
 
     </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
