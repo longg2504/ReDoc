@@ -1,43 +1,46 @@
 @extends('client.layout.index')
 
 @section('content')
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <script src="https://cdn.jsdelivr.net/npm/polyline-encoded@0.0.9/Polyline.encoded.min.js"></script>
 
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-		integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-		crossorigin="" />
-	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-		integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-		crossorigin=""></script>
-		<script src="https://cdn.jsdelivr.net/npm/polyline-encoded@0.0.9/Polyline.encoded.min.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
 
-	<style>
-		* {
-			padding: 0;
-			margin: 0;
-		}
-	</style>
+    </style>
+    <div class="breadcrumb mt-4"><label class="font-weight-600">Trang chủ/</label><span>Cửa hàng gần bạn nhất</span></div>
 
-	<div style="position:relative;width: 100%;height: 100vh;">
-		<div id="mapid" style="width: 100%; height: 50%"></div>
-        <div>
-            <div>
-                <h1 id="distance_nearest">{{ $nearest["distance"] }} km</h1>
-                <h1 id="duration_nearest">{{ $nearest["duration"] }} phút</h1>
-            </div>
-            <select id="select-drugstore" style="width: 100%;">
-                <option value="">Select route</option>
-                @foreach($listDrugstore as $key => $drugstore)
-                    <option {{ $key == 0 ? 'selected' : "" }} value="{{ $key . '-' . $drugstore['distance'] . '-' . $drugstore['duration'] }}"> {{$drugstore['name']}} </option>
+    <div class="mt-3 bg-white p-3" style="position:relative;width: 100%;height: 100vh; ">
+        <div class="form-group">
+            <label for="">Chọn đường đi đến nhà thuốc</label>
+            <select class="form-control mb-3 col-md-8" id="select-drugstore" style="width: 100%;">
+                <option value="">Chọn nhà thuốc</option>
+                @foreach ($listDrugstore as $key => $drugstore)
+                    <option {{ $key == 0 ? 'selected' : '' }}
+                        value="{{ $key . '-' . $drugstore['distance'] . '-' . $drugstore['duration'] }}">
+                        {{ $drugstore['name'] }} </option>
                 @endforeach
             </select>
         </div>
-	</div>
-
+        <div id="mapid" style="width: 100%; height: 50%"></div>
+        <div>
+            <div>
+                <h5 id="distance_nearest">Quãng đường : {{ $nearest['distance'] }} km</h5>
+                <h5 id="duration_nearest">Thời gian :{{ $nearest['duration'] }} phút</h5>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('js')
-
     <script>
-
         var nearest = {!! json_encode($nearest) !!};
         var origin = {!! json_encode($origin) !!};
         var listDrugstore = {!! json_encode($listDrugstore) !!};
@@ -62,18 +65,20 @@
 
         var mapLocations = {};
         var markersLayer = new L.LayerGroup();
+
         function onMapClick(e) {
             var id = e.sourceTarget.options.id;
             if (!id) return;
         }
 
         var mymap = L.map('mapid').setView([origin.latitude, origin.longitude], 13);
-        L.tileLayer('https://maps.vietmap.vn/tm/{z}/{x}/{y}@2x.png?apikey=b351baf1a7da8fcbb75a4a480e849ae4a8b7e48d1d1ff046', {
-            maxZoom: 17,
-            id: 'vietmap',
-            tileSize: 512,
-            zoomOffset: -1
-        }).addTo(mymap);
+        L.tileLayer(
+            'https://maps.vietmap.vn/tm/{z}/{x}/{y}@2x.png?apikey=b351baf1a7da8fcbb75a4a480e849ae4a8b7e48d1d1ff046', {
+                maxZoom: 17,
+                id: 'vietmap',
+                tileSize: 512,
+                zoomOffset: -1
+            }).addTo(mymap);
 
         function showPoint() {
             this.markersLayer.clearLayers();
@@ -88,7 +93,10 @@
                     shadowAnchor: [22, 94]
                 });
 
-                var marker = L.marker([locations[i].y, locations[i].x], { icon: myIcon, id: locations[i].id }).on('click', onMapClick);
+                var marker = L.marker([locations[i].y, locations[i].x], {
+                    icon: myIcon,
+                    id: locations[i].id
+                }).on('click', onMapClick);
 
                 marker.bindPopup(`
                     <table style="width:100%">
@@ -114,36 +122,41 @@
             markersLayer.addTo(mymap);
 
         }
-        function showLine(){
 
-        var myHeaders = new Headers();
-        myHeaders.append("accept", "text/plain");
-        myHeaders.append("Content-Type", "application/json");
+        function showLine() {
 
-        var requestOptions = {
-            method: 'GET',
-            headers: myHeaders,
-            redirect: 'follow'
-        };
-        var points=locations.map(p=>`point=${p.y},${p.x}`).join("&");
-        fetch(`https://maps.vietmap.vn/api/route?api-version=1.1&apikey=b351baf1a7da8fcbb75a4a480e849ae4a8b7e48d1d1ff046&vehicle=car&${points}`, requestOptions)
-        .then(response => response.text())
-        .then(result =>{
-            var resRouting=JSON.parse(result);
-            console.log(resRouting);
-            var pointList=L.PolylineUtil.decode(resRouting.paths[0].points);
-            console.log(pointList);
-            var polyline  = new L.polyline(pointList,{color: 'red'}).addTo(mymap);;
-            // zoom the map to the polyline
-            mymap.fitBounds(polyline.getBounds());
+            var myHeaders = new Headers();
+            myHeaders.append("accept", "text/plain");
+            myHeaders.append("Content-Type", "application/json");
 
-        } )
-        .catch(error => console.log('error', error))}
+            var requestOptions = {
+                method: 'GET',
+                headers: myHeaders,
+                redirect: 'follow'
+            };
+            var points = locations.map(p => `point=${p.y},${p.x}`).join("&");
+            fetch(`https://maps.vietmap.vn/api/route?api-version=1.1&apikey=b351baf1a7da8fcbb75a4a480e849ae4a8b7e48d1d1ff046&vehicle=car&${points}`,
+                    requestOptions)
+                .then(response => response.text())
+                .then(result => {
+                    var resRouting = JSON.parse(result);
+                    console.log(resRouting);
+                    var pointList = L.PolylineUtil.decode(resRouting.paths[0].points);
+                    console.log(pointList);
+                    var polyline = new L.polyline(pointList, {
+                        color: 'red'
+                    }).addTo(mymap);;
+                    // zoom the map to the polyline
+                    mymap.fitBounds(polyline.getBounds());
+
+                })
+                .catch(error => console.log('error', error))
+        }
 
         showPoint();
         showLine();
 
-        $("#select-drugstore").change(function(){
+        $("#select-drugstore").change(function() {
             var data = $(this).val();
             var key = data.split("-")[0];
             var distance = data.split("-")[1];
@@ -158,10 +171,9 @@
             })
             showPoint();
             showLine();
-            $("#distance_nearest").html(distance + ' km');
-            $("#duration_nearest").html(duration + ' phút');
+            $("#distance_nearest").html('Quãng đường :' + distance + ' km');
+            $("#duration_nearest").html('Thời gian :' +duration + ' phút');
         });
-
     </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>

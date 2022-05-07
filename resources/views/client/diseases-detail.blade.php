@@ -41,9 +41,10 @@
             </ul>
         </div>
 
-        <div class="content col-xs-12 col-md-12 no-paddings-sm mt-1">
+        <div class="content col-xs-8 col-md-8 no-paddings-sm mt-1">
             <h5>Đơn thuốc</h5>
-            <table class="table">
+
+            <table class="table m-auto">
                 <thead>
                     <tr>
                         <th scope="col">STT</th>
@@ -64,14 +65,18 @@
                 </tbody>
             </table>
 
+
+
         </div>
-        @if (isset($user->address))
-            <form action="{{ route('client.matrix') }}" method="post">
-                @csrf
-                <input type="hidden" name="origin" value="{{ $user->address }}">
-                <button type="submit" class="btn btn-primary">Nhà Thuốc gần bạn</button>
-            </form>
-        @endif
+        <div class="content col-xs-8 col-md-8 no-paddings-sm mt-1">
+            @if (isset($user->address))
+                <form action="{{ route('client.matrix') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="origin" value="{{ $user->address }}">
+                    <button type="submit" class="btn btn-primary">Nhà Thuốc gần bạn</button>
+                </form>
+            @endif
+        </div>
     </div>
 @endsection
 
