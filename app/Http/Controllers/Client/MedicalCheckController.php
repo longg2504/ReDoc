@@ -47,16 +47,16 @@ class MedicalCheckController extends Controller
 
         foreach ($preCheck as $value) {
 
-            $check[] = $value->diseases;
-            if(Auth::check()) {
-                $prescription[] = $value->diseases->prescriptions()->with('medicines', 'diseases')->where('age', '<=', $user->age)->get();
-            } else {
-                $prescription[] = $value->diseases->prescriptions()->with('medicines', 'diseases')->get();
-            }
+            $check = $value->diseases()->with('media')->get();
+            // if(Auth::check()) {
+            //     $prescription[] = $value->diseases->prescriptions()->with('medicines', 'diseases')->where('age', '<=', $user->age)->get();
+            // } else {
+            //     $prescription[] = $value->diseases->prescriptions()->with('medicines', 'diseases')->get();
+            // }
 
         }
 
-        return response()->json($prescription);
+        return response()->json($check);
     }
 
 
@@ -64,8 +64,18 @@ class MedicalCheckController extends Controller
 
         $disease = Diseases::find($id);
         $symptoms = $disease->symptoms()->get();
-        $prescription = $disease->prescriptions()->with('medicines')->get();
-        $user = auth()->user();
+        $user = Auth::user();
+
+        if(Auth::check()) {
+            $prescription = $disease->prescriptions()->with('medicines')->whereRaw('age <= '. $user->age)->get();
+        } else {
+            $prescription = $disease->prescriptions()->with('medicines')->get();
+        }
+
+        if(count($prescription) == 0) {
+            Alert::warning('Success', "Tạm thời chưa có đơn thuốc cho bệnh $disease->name với độ tuổi $user->age !");
+            return redirect()->route('client.medical-check-up');
+        }
 
         if (!Auth::check()) {
             Alert::warning('Hãy login để có thế tìm được nhà thuốc gần bạn nhất!')
@@ -73,7 +83,6 @@ class MedicalCheckController extends Controller
             ->showConfirmButton()
             ->autoClose(false);
         }
-        // dd($prescription);
 
         return view('client.diseases-detail', compact('disease', 'symptoms', 'prescription', 'user'));
     }

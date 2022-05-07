@@ -20,12 +20,13 @@
 
     </style>
     <div class="breadcrumb mt-4"><label class="font-weight-600">Chi tiết về bệnh</label>
-        <span>{{ $disease->name }}</span>
+        <span>{{ ' > ' . $disease->name }}</span>
     </div>
 
     <div class="row bg-white">
         <div class="content col-xs-12 col-md-12 no-paddings-sm mt-1">
             <h3>{{ $disease->name }}</h3>
+            <img src="{{ $disease->media->getMedia($disease->media, 'thumb') }}" alt="{{ $disease->name }}" class="img-fluid">
         </div>
 
         <div class="content col-xs-12 col-md-12 no-paddings-sm mt-1">
@@ -49,6 +50,7 @@
                     <tr>
                         <th scope="col">STT</th>
                         <th scope="col">Tên thuốc</th>
+                        <th scope="col">Hình ảnh</th>
                         <th scope="col">Số lượng</th>
                         <th scope="col">Liều lượng</th>
                     </tr>
@@ -58,6 +60,9 @@
                         <tr>
                             <th scope="row">{{ $key + 1 }}</th>
                             <td>{{ $item->medicines->name }}</td>
+                            <td>
+                                <img src="{{ $item->medicines->media ? $item->medicines->media->getMedia($item->medicines->media, 'thumb') : "" }}" alt="{{ $item->medicines->name }}" class="img-fluid">
+                            </td>
                             <td>{{ $item->amount }}</td>
                             <td>{{ $item->dosage }}</td>
                         </tr>

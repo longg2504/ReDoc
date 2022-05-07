@@ -42,22 +42,27 @@ $(document).ready(function () {
             url: '/api/medical-check-up/diseases',
             success: (data) => {
                 console.log(data);
+
+                var url = '/storage/images/diseases/';
+
                 if (data.length > 0) {
                     $('.list-diseases').empty();
                     $('.diseases').show();
-                    for (let i = 0; i < data.length; i++) {
-                        if (data[i].length > 0) {
+                    if (data.length > 0) {
+                        for (let i = 0; i < data.length; i++) {
+
                             $('.list-diseases').append(`
-                                <a href="/diseases/${data[i][0].diseases.id}">
+                                <a href="/diseases/${data[i].id}">
                                     <div class="card">
-                                        <img class="card-img-top" src="https://tamanhhospital.vn/wp-content/uploads/2021/08/bsi-tham-kham-benh-nhan.jpg" alt="">
+                                        <img class="card-img-top" src="${url + data[i].media.name}" alt="">
                                         <div class="card-body">
-                                            <h6 class="card-title">${data[i][0].diseases.name}</h6>
-                                            <p class="card-text">bệnh này là bệnh............</p>
+                                            <h6 class="card-title">${data[i].name}</h6>
+                                            <p class="card-text">${data[i].description}</p>
                                         </div>
                                     </div>
                                 </a>
                             `);
+
                         }
                     }
                 }

@@ -200,14 +200,7 @@
                                 <div class="post-content">
                                     <h2><a href="/post/{{ $post->id }}">{{$post->title}}</a>
                                     </h2>
-                                    Theo thỏa thuận hợp tác với Vinmec nhằm xây dựng các Trung tâm xuất sắc (COE) về Tim
-                                    mạch và Ung
-                                    bướu đầu tiên tại Việt Nam, Đại học Pensylvania (PENN) đã cam kết kế hoạch triển khai
-                                    chiến lược
-                                    nhằm chuẩn bị nguồn nhân lực cho các chuyên khoa nói trên. Hiện nay, PENN đã cử các
-                                    chuyên gia,
-                                    bác sĩ, điều dưỡng trực tiếp làm việc theo 2 hình thức thường xuyên và luân phiên tại
-                                    Vinmec.
+                                    <p>{{$post->description}}</p>
                                 </div>
                             </li>
                         @endforeach

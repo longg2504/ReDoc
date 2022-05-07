@@ -19,6 +19,6 @@ class Media extends Model
     }
 
     public function getMedia($item, $type) {
-        return Common::getImage($item->name, $type, 'posts');
+        return Common::getImage($item->name, $type, $item->path);
     }
 }
