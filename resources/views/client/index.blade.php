@@ -164,7 +164,7 @@
 
 </style>
 @section('content')
-    <div class="breadcrumb-vn mt-4"><label class="font-weight-600">Trang chủ</div>
+    <div class="breadcrumb mt-4"><label class="font-weight-600">Trang chủ</div>
     <div class="row bg-white">
         <div class="col-md-3">
             <h3 class="title">Danh mục</h3>

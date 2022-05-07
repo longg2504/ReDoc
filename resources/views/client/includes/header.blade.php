@@ -62,6 +62,25 @@ $url = url()->current();
                 </a>
             </li>
         </ul>
-        <ul class="navbar-nav"></ul>
+        <style>
+            .sing-in {
+                font-size: 17px;
+            }
+
+        </style>
+        <ul class="navbar-nav">
+            @if (Auth::user())
+                <li class="nav-item sing-in dropdown mr-3">
+                    <i class="fa fa-sign-in" aria-hidden="true"></i>
+                    <a href="{{route('client.logout')}}">Đăng xuất</a>
+                </li>
+            @else
+                <li class="nav-item sing-in dropdown mr-3">
+                    <i class="fa fa-sign-in" aria-hidden="true"></i>
+                    <a href="{{route('client.login')}}">Đăng nhập</a>
+                </li>
+            @endif
+
+        </ul>
     </div>
 </nav>
