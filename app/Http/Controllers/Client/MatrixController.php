@@ -24,7 +24,7 @@ class MatrixController extends Controller
         ];
 
         foreach ($drugstore as $key => $value) {
-            if ($key < 3) {
+            if ($key < 1) {
                 $distance = $map->getDistanceByMatrix($request->origin, $value->address);
                 $listDrugstore[$key]['id'] = $value->id;
                 $listDrugstore[$key]['name'] = $value->name;
@@ -63,7 +63,7 @@ class MatrixController extends Controller
             $user = Auth::user();
 
             foreach ($drugstore as $key => $value) {
-                if ($key < 3) {
+                if ($key < 1) {
                     $distance = $map->getDistanceByMatrix($user->address, $value->address);
                     $listDrugstore[$key]['id'] = $value->id;
                     $listDrugstore[$key]['name'] = $value->name;
