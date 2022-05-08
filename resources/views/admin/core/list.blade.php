@@ -85,3 +85,4 @@
         @endif
     </tbody>
 </table>
+{{ $data->appends($_GET)->links('vendor.pagination.tailwind') }}

@@ -61,7 +61,7 @@
                             <th scope="row">{{ $key + 1 }}</th>
                             <td>{{ $item->medicines->name }}</td>
                             <td>
-                                <img src="{{ $item->medicines->media ? $item->medicines->media->getMedia($item->medicines->media, 'thumb') : "" }}" alt="{{ $item->medicines->name }}" class="img-fluid">
+                                <img style="width: 400px; height: 400px" src="{{ $item->medicines->media ? $item->medicines->media->getMedia($item->medicines->media, 'thumb') : "" }}" alt="{{ $item->medicines->name }}" class="img-fluid">
                             </td>
                             <td>{{ $item->amount }}</td>
                             <td>{{ $item->dosage }}</td>

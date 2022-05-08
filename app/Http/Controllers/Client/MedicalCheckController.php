@@ -33,27 +33,28 @@ class MedicalCheckController extends Controller
         $preCheck = Disease_symptoms::with('diseases')->where('symptom_id', $listSymptoms[0])->get();
         unset($listSymptoms[0]);
 
-        foreach ($listSymptoms as $value) {
+        if(count($listSymptoms) > 0) {
+            foreach ($listSymptoms as $value) {
 
-            foreach ($preCheck as $preCheckKey => $preCheckValue) {
+                foreach ($preCheck as $preCheckKey => $preCheckValue) {
 
-                $check = $preCheckValue->diseases->symptoms->pluck('id')->toArray();
+                    $check = $preCheckValue->diseases->symptoms->pluck('id')->toArray();
 
-                if (!in_array($value, $check)) {
-                    unset($preCheck[$preCheckKey]);
+                    if (!in_array($value, $check)) {
+                        unset($preCheck[$preCheckKey]);
+                    }
                 }
             }
         }
 
         foreach ($preCheck as $value) {
 
-            $check = $value->diseases()->with('media')->get();
+            $check[] = $value->diseases()->with('media')->get();
             // if(Auth::check()) {
             //     $prescription[] = $value->diseases->prescriptions()->with('medicines', 'diseases')->where('age', '<=', $user->age)->get();
             // } else {
             //     $prescription[] = $value->diseases->prescriptions()->with('medicines', 'diseases')->get();
             // }
-
         }
 
         return response()->json($check);
