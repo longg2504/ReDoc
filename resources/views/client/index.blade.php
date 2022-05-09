@@ -180,7 +180,7 @@
         </div>
         <div class="col-md-9 pr-0">
             <div class="breadcrumb">
-                <a href="/tin-tuc/" class="no-underline">Tin tức</a>
+                <a href="/" class="no-underline">Tin tức</a>
                 @if (url()->current() != route('client.index'))
                     <span class="icon-title"></span>
                     <span>

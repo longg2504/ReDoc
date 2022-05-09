@@ -37,12 +37,16 @@
                     <form action="{{ route('client.postRegister') }}" method='post' class="ng-invalid ng-dirty ng-touched" >
                         @csrf
                         <div  class="form-group">
-                            <label >Họ và tên<span  class="text-danger"> *</span></label>
-                            <input name="username"  placeholder="Nhập họ và tên" formcontrolname="fullName" class="form-control input-custom ng-untouched ng-pristine ng-invalid" />
+                            <label >Tên tài khoản<span  class="text-danger"> *</span></label>
+                            <input name="username"  placeholder="Nhập tên tài khoản" formcontrolname="fullName" class="form-control input-custom ng-untouched ng-pristine ng-invalid" />
                         </div>
                         <div  class="form-group">
                             <label >Email<span  class="text-danger"> *</span></label>
                             <input name="email"  placeholder="Nhập email" formcontrolname="email" class="form-control input-custom ng-untouched ng-pristine ng-invalid" />
+                        </div>
+                        <div  class="form-group">
+                            <label >Address<span  class="text-danger"> *</span></label>
+                            <input name="address"  placeholder="Nhập address" formcontrolname="address" class="form-control input-custom ng-untouched ng-pristine ng-invalid" />
                         </div>
                         <div  class="form-group">
                             <label >Mật khẩu<span  class="text-danger"> *</span></label>
@@ -56,15 +60,6 @@
                                 <input name="repassword" placeholder="Nhập xác nhận mật khẩu" formcontrolname="passwordConfirm" class="form-control input-custom ng-untouched ng-pristine ng-invalid" type="password" />
 
                             </div>
-                        </div>
-                        <div  class="form-group small">
-                            <span  class="text-danger">Lưu ý: </span>
-                            <p  class="mb-0">Mật khẩu phải có độ dài ít nhất 6 ký tự bao gồm ít nhất:</p>
-                            <ul >
-                                <li >1 ký tự hoa</li>
-                                <li >1 ký tự thường</li>
-                                <li >1 ký tự số</li>
-                            </ul>
                         </div>
                         <div  class="form-group mt-4">
                             <button  type="submit" class="btn btn-block btn-lg vn-btn-success">
