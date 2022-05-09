@@ -30,7 +30,9 @@
                 @endforeach
             </select>
         </div>
-        <div id="mapid" style="width: 100%; height: 50%"></div>
+        <div id="mapRaw" class="mt-3 bg-white p-3" style="position:relative;width: 100%;height: 60vh; ">
+            <div id="mapid" style="width: 100%; height: 100%"></div>
+        </div>
         <div>
             <div>
                 <h5 id="distance_nearest">Quãng đường : {{ $nearest['distance'] }} km</h5>
@@ -72,7 +74,8 @@
             if (!id) return;
         }
 
-        var mymap = L.map('mapid').setView([origin.latitude, origin.longitude], 13);
+        let mymap = L.map('mapid').setView([origin.latitude, origin.longitude], 13);
+
         L.tileLayer('https://maps.vietmap.vn/tm/{z}/{x}/{y}@2x.png?apikey=2a549e9d588f70590da10665c733e5c5f0f0961393c3374c', {
             maxZoom: 17,
             id: 'vietmap',
@@ -80,7 +83,7 @@
             zoomOffset: -1
         }).addTo(mymap);
 
-        function showPoint() {
+        function showPoint(map) {
             this.markersLayer.clearLayers();
             for (i = 0; i < locations.length; i++) {
 
@@ -119,11 +122,11 @@
 
                 mapLocations[locations[i].id] = locations[i];
             }
-            markersLayer.addTo(mymap);
+            markersLayer.addTo(map);
 
         }
 
-        function showLine() {
+        function showLine(map) {
 
             var myHeaders = new Headers();
             myHeaders.append("accept", "text/plain");
@@ -145,16 +148,16 @@
                     console.log(pointList);
                     var polyline = new L.polyline(pointList, {
                         color: 'red'
-                    }).addTo(mymap);;
+                    }).addTo(map);;
                     // zoom the map to the polyline
-                    mymap.fitBounds(polyline.getBounds());
+                    map.fitBounds(polyline.getBounds());
 
                 })
                 .catch(error => console.log('error', error))
         }
 
-        showPoint();
-        showLine();
+        showPoint(mymap);
+        showLine(mymap);
 
         $("#select-drugstore").change(function(){
             var data = $(this).val();
@@ -162,6 +165,7 @@
             var distance = data.split("-")[1];
             var duration = data.split("-")[2];
             locations.pop();
+            console.log(locations);
             locations.push({
                 "x": listDrugstore[key].longitude,
                 "y": listDrugstore[key].latitude,
@@ -169,8 +173,22 @@
                 "name": listDrugstore[key].name,
                 "address": listDrugstore[key].address
             })
-            showPoint();
-            showLine();
+
+            document.getElementById('mapRaw').innerHTML = '<div id="mapid1" style="width: 100%; height: 100%"></div>';
+
+            var mymap = L.map('mapid1').setView([origin.latitude, origin.longitude], 13);
+            L.tileLayer('https://maps.vietmap.vn/tm/{z}/{x}/{y}@2x.png?apikey=2a549e9d588f70590da10665c733e5c5f0f0961393c3374c', {
+                maxZoom: 17,
+                id: 'vietmap',
+                tileSize: 512,
+                zoomOffset: -1
+            }).addTo(mymap);
+
+            showPoint(mymap);
+            showLine(mymap);
+
+            console.log(distance);
+
             $("#distance_nearest").html('Quãng đường : ' + distance + ' km');
             $("#duration_nearest").html('Thời gian :' + duration + ' phút');
         });

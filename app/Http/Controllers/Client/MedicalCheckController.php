@@ -47,9 +47,11 @@ class MedicalCheckController extends Controller
             }
         }
 
+        $result = [];
+
         foreach ($preCheck as $value) {
 
-            $check[] = $value->diseases()->with('media')->get();
+            $result[] = $value->diseases()->with('media')->get();
             // if(Auth::check()) {
             //     $prescription[] = $value->diseases->prescriptions()->with('medicines', 'diseases')->where('age', '<=', $user->age)->get();
             // } else {
@@ -57,7 +59,7 @@ class MedicalCheckController extends Controller
             // }
         }
 
-        return response()->json($check);
+        return response()->json($result);
     }
 
 

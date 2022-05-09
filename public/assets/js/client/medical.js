@@ -38,15 +38,16 @@ $(document).ready(function () {
         let symptoms = $('select[name="symptoms[]"').val();
         $.ajax({
             type: 'POST',
-            data: 'listSymptoms=' + symptoms,
+            data: 'listSymptoms=' + symptoms.toString(),
             url: '/api/medical-check-up/diseases',
             success: (data) => {
                 console.log("data: ", data);
                 var url = '/storage/images/diseases/';
 
+                $('.list-diseases').empty();
+                $('.diseases').show();
+
                 if (data.length > 0) {
-                    $('.list-diseases').empty();
-                    $('.diseases').show();
                     if (data.length > 0) {
                         for (let i = 0; i < data.length; i++) {
 
