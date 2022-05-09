@@ -83,7 +83,8 @@
             zoomOffset: -1
         }).addTo(mymap);
 
-        function showPoint(map) {
+        function showPoint(map, markersLayerNew) {
+
             this.markersLayer.clearLayers();
             for (i = 0; i < locations.length; i++) {
 
@@ -118,12 +119,12 @@
                     </table>
                 `);
 
-                markersLayer.addLayer(marker);
+                markersLayerNew.addLayer(marker);
 
                 mapLocations[locations[i].id] = locations[i];
             }
-            markersLayer.addTo(map);
 
+            markersLayerNew.addTo(map);
         }
 
         function showLine(map) {
@@ -156,7 +157,7 @@
                 .catch(error => console.log('error', error))
         }
 
-        showPoint(mymap);
+        showPoint(mymap, markersLayer);
         showLine(mymap);
 
         $("#select-drugstore").change(function(){
@@ -184,7 +185,9 @@
                 zoomOffset: -1
             }).addTo(mymap);
 
-            showPoint(mymap);
+            var markersLayerNew = new L.LayerGroup();
+
+            showPoint(mymap, markersLayerNew);
             showLine(mymap);
 
             console.log(distance);

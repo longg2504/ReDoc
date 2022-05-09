@@ -49,6 +49,10 @@
                             <input name="address"  placeholder="Nhập address" formcontrolname="address" class="form-control input-custom ng-untouched ng-pristine ng-invalid" />
                         </div>
                         <div  class="form-group">
+                            <label >Age<span  class="text-danger"> *</span></label>
+                            <input name="age"  placeholder="Nhập age" formcontrolname="age" class="form-control input-custom ng-untouched ng-pristine ng-invalid" />
+                        </div>
+                        <div  class="form-group">
                             <label >Mật khẩu<span  class="text-danger"> *</span></label>
                             <div  class="input-group mb-3">
                                 <input name="password" formcontrolname="password" placeholder="Nhập mật khẩu" class="form-control input-custom ng-dirty ng-valid ng-touched" type="password" />

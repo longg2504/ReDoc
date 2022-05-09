@@ -59,7 +59,6 @@ $(document).ready(function () {
                                         <img class="card-img-top" src="${url + data[i][0].media.name}" alt="">
                                         <div class="card-body">
                                             <h6 class="card-title">${data[i][0].name}</h6>
-
                                         </div>
                                     </div>
                                 </a>

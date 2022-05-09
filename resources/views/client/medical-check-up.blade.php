@@ -25,7 +25,7 @@
                 <div class="diseases">
                     <h6 class="card-title">Có thể bạn đã mắc phải những bệnh dưới đây</h6>
                     <div class="card-columns list-diseases">
-                       
+
                     </div>
                 </div>
                 <div class="not-diseases">
