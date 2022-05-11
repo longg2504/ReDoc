@@ -27,27 +27,27 @@ class MedicalCheckController extends Controller
     {
         $data = $request->all();
         $listSymptoms = explode(',', $data['listSymptoms']);
-        $user = Auth::user();
-        $prescription = [];
 
-        $preCheck = Disease_symptoms::with('diseases')->where('symptom_id', $listSymptoms[0])->get();
-        unset($listSymptoms[0]);
+        $preCheck = Disease_symptoms::whereIn('symptom_id', $listSymptoms)->get();
 
-        if(count($listSymptoms) > 0) {
-            foreach ($listSymptoms as $value) {
+        // $preCheck = Disease_symptoms::with('diseases')->where('symptom_id', $listSymptoms[0])->get();
+        // unset($listSymptoms[0]);
 
-                foreach ($preCheck as $preCheckKey => $preCheckValue) {
+        // if(count($listSymptoms) > 0) {
+        //     foreach ($listSymptoms as $value) {
 
-                    $check = $preCheckValue->diseases->symptoms->pluck('id')->toArray();
+        //         foreach ($preCheck as $preCheckKey => $preCheckValue) {
 
-                    if (!in_array($value, $check)) {
-                        unset($preCheck[$preCheckKey]);
-                    }
-                }
-            }
-        }
+        //             $check = $preCheckValue->diseases->symptoms->pluck('id')->toArray();
 
-        $result = [];
+        //             if (!in_array($value, $check)) {
+        //                 unset($preCheck[$preCheckKey]);
+        //             }
+        //         }
+        //     }
+        // }
+
+        // $result = [];
 
         foreach ($preCheck as $value) {
 

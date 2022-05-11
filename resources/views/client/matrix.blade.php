@@ -86,16 +86,27 @@
         function showPoint(map, markersLayerNew) {
 
             this.markersLayer.clearLayers();
-            for (i = 1; i < locations.length; i++) {
+            for (i = 0; i < locations.length; i++) {
 
-                var myIcon = L.icon({
-                    iconUrl: 'images/my-icon.png',
-                    iconSize: [32, 32],
-                    iconAnchor: [16, 32],
-                    popupAnchor: [0, -32],
-                    shadowSize: [68, 95],
-                    shadowAnchor: [22, 94]
-                });
+                if (locations[i]['id'] == 1) {
+                    var myIcon = L.icon({
+                        iconUrl: 'images/my-icon-red.png',
+                        iconSize: [32, 32],
+                        iconAnchor: [16, 32],
+                        popupAnchor: [0, -32],
+                        shadowSize: [68, 95],
+                        shadowAnchor: [22, 94]
+                    });
+                } else {
+                    var myIcon = L.icon({
+                        iconUrl: 'images/my-icon.png',
+                        iconSize: [32, 32],
+                        iconAnchor: [16, 32],
+                        popupAnchor: [0, -32],
+                        shadowSize: [68, 95],
+                        shadowAnchor: [22, 94]
+                    });
+                }
 
                 var marker = L.marker([locations[i].y, locations[i].x], {
                     icon: myIcon,

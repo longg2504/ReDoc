@@ -75,7 +75,7 @@
         </div>
         <div class="content col-xs-8 col-md-8 no-paddings-sm mt-1">
             @if (isset($user->address))
-                <form action="{{ route('client.matrix') }}" method="post">
+                <form action="{{ route('client.matrix') }}" method="get">
                     @csrf
                     <input type="hidden" name="origin" value="{{ $user->address }}">
                     <button type="submit" class="btn btn-primary">Gợi ý đến hiệu thuốc gần nhất</button>

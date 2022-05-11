@@ -28,7 +28,6 @@ class SingupRequest extends FormRequest
             'email' => 'bail|required|email',
             'address' => 'bail|required',
             'district' => 'bail|required',
-            'city' => 'bail|required',
             'age' => 'bail|numeric|min:1|max:99',
             'password' => 'bail|required',
             'repassword' => 'bail|required|same:password',

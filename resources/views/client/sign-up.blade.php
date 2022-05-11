@@ -70,11 +70,6 @@
                                 <option value="">
                                     <--- chọn quận --->
                                 </option>
-                                <option value="2">Liên Chiểu</option>
-                                <option value="3">Sơn Trà</option>
-                                <option value="4">Cẩm lệ</option>
-                                <option value="5">Ngũ Hành</option>
-                                <option value="6">Sơn Thanh Khê</option>
                             </select>
                             @error('district')
                                 <small class="text-danger">* {{ $message }}</small>
@@ -82,12 +77,12 @@
                         </div>
                         <div class="form-group">
                             <label for="">Thành phố<span class="text-danger"> *</span></label>
-                            <select name="" class="form-control" name="">\
-                                <option value="1">Đà Nẵng</option>
+                            <select class="form-control">
+                                <option selected value="1">Đà Nẵng</option>
                             </select>
-                            @error('city')
+                            {{-- @error('city')
                                 <small class="text-danger">* {{ $message }}</small>
-                            @enderror
+                            @enderror --}}
                         </div>
                         <div class="form-group">
                             <label>Tuổi<span class="text-danger"> *</span></label>

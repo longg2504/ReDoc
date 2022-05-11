@@ -35,26 +35,23 @@
         var locations = [];
 
         locations.push({
-            "x": origin,
+            "x": origin[1],
             "y": origin[0],
-            "id": 0,
+            "id": 1,
             "name": "Địa chỉ của bạn",
             "address": addressOrigin
         })
 
-        listDrugstore.forEach(element => {
+        listDrugstore.forEach((element, id) => {
 
             locations.push({
                 "x": element.longitude,
                 "y": element.latitude,
-                "id": element.id,
+                "id": id + 2,
                 "name": element.name,
                 "address": element.address
             })
         });
-
-        console.log(origin);
-        console.log(locations);
 
         var mapLocations = {};
         var markersLayer = new L.LayerGroup();
@@ -63,7 +60,7 @@
             if (!id) return;
         }
 
-        var mymap = L.map('mapid').setView([listDrugstore[0]['latitude'], listDrugstore[0]['longitude']], 13);
+        var mymap = L.map('mapid').setView([origin[0], origin[1]], 13);
         L.tileLayer('https://maps.vietmap.vn/tm/{z}/{x}/{y}@2x.png?apikey=b351baf1a7da8fcbb75a4a480e849ae4a8b7e48d1d1ff046', {
             maxZoom: 17,
             id: 'vietmap',
@@ -75,14 +72,25 @@
             this.markersLayer.clearLayers();
             for (i = 0; i < locations.length; i++) {
 
-                var myIcon = L.icon({
-                    iconUrl: 'images/my-icon.png',
-                    iconSize: [32, 32],
-                    iconAnchor: [16, 32],
-                    popupAnchor: [0, -32],
-                    shadowSize: [68, 95],
-                    shadowAnchor: [22, 94]
-                });
+                if (locations[i]['id'] == 1) {
+                    var myIcon = L.icon({
+                        iconUrl: 'images/my-icon-red.png',
+                        iconSize: [32, 32],
+                        iconAnchor: [16, 32],
+                        popupAnchor: [0, -32],
+                        shadowSize: [68, 95],
+                        shadowAnchor: [22, 94]
+                    });
+                } else {
+                    var myIcon = L.icon({
+                        iconUrl: 'images/my-icon.png',
+                        iconSize: [32, 32],
+                        iconAnchor: [16, 32],
+                        popupAnchor: [0, -32],
+                        shadowSize: [68, 95],
+                        shadowAnchor: [22, 94]
+                    });
+                }
 
                 var marker = L.marker([locations[i].y, locations[i].x], { icon: myIcon, id: locations[i].id }).on('click', onMapClick);
 
@@ -112,35 +120,7 @@
 
         }
 
-        function showLine(){
-
-            var myHeaders = new Headers();
-            myHeaders.append("accept", "text/plain");
-            myHeaders.append("Content-Type", "application/json");
-
-            var requestOptions = {
-                method: 'GET',
-                headers: myHeaders,
-                redirect: 'follow'
-            };
-            var points=locations.map(p=>`point=${p.y},${p.x}`).join("&");
-            fetch(`https://maps.vietmap.vn/api/route?api-version=1.1&apikey=b351baf1a7da8fcbb75a4a480e849ae4a8b7e48d1d1ff046&vehicle=car&${points}`, requestOptions)
-            .then(response => response.text())
-            .then(result =>{
-                var resRouting=JSON.parse(result);
-                console.log(resRouting);
-                var pointList=L.PolylineUtil.decode(resRouting.paths[0].points);
-                console.log(pointList);
-                var polyline  = new L.polyline(pointList,{color: 'red'}).addTo(mymap);;
-                // zoom the map to the polyline
-                mymap.fitBounds(polyline.getBounds());
-
-            } )
-            .catch(error => console.log('error', error))
-        }
-
         showPoint();
-        // showLine();
 
     </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />

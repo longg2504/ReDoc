@@ -27,18 +27,6 @@ class AuthController extends AdminController
     {
         try {
 
-            // $validator = Validator::make($request->all(), [
-            //     'username' => 'required',
-            //     'password' => 'required',
-            //     'email' => 'required|email'
-            // ]);
-
-            // if ($validator->fails()) {
-
-            //     Alert::error('error', 'Thiếu thông tin cần thiết !');
-            //     return back();
-            // }
-
             $userWithName = User::where('username', $request->username)->first();
             $userWithEmail = User::where('email', $request->email)->first();
 

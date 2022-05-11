@@ -10,31 +10,35 @@ use Illuminate\Support\Facades\Auth;
 
 class MatrixController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
+        $user = Auth::user();
         $map = new CalculateDistanceService();
-        $originRaw = $map->getGeoCodeFromAddress($request->origin);
+        $originRaw = $map->getGeoCodeFromAddress($user->address);
         $drugstore = Drugstores::all();
         $listDrugstore = [];
 
         $origin = [
             'latitude' => explode(',', $originRaw)[0],
             'longitude' => explode(',', $originRaw)[1],
-            'address' => $request->origin
+            'address' => $user->address
         ];
 
+        $count = 0;
+
         foreach ($drugstore as $key => $value) {
-            if ($key < 2) {
-                $distance = $map->getDistanceByMatrix($request->origin, $value->address);
-                $listDrugstore[$key]['id'] = $value->id;
-                $listDrugstore[$key]['name'] = $value->name;
-                $listDrugstore[$key]['address'] = $value->address;
-                $listDrugstore[$key]['distance'] = $distance[0];
-                $listDrugstore[$key]['duration'] = $distance[1];
+            if ($user->district == $value->district) {
+                $distance = $map->getDistanceByMatrix($user->address, $value->address);
+                $listDrugstore[$count]['id'] = $count;
+                $listDrugstore[$count]['name'] = $value->name;
+                $listDrugstore[$count]['address'] = $value->address;
+                $listDrugstore[$count]['distance'] = $distance[0];
+                $listDrugstore[$count]['duration'] = $distance[1];
 
                 $address = $map->getGeoCodeFromAddress($value->address);
-                $listDrugstore[$key]['latitude'] = explode(',', $address)[0];
-                $listDrugstore[$key]['longitude'] = explode(',', $address)[1];
+                $listDrugstore[$count]['latitude'] = explode(',', $address)[0];
+                $listDrugstore[$count]['longitude'] = explode(',', $address)[1];
+                $count++;
             }
         }
 
@@ -64,18 +68,21 @@ class MatrixController extends Controller
             $addressOrigin = $user->address;
             $origin = $map->getGeoCodeFromAddress($addressOrigin);
 
+            $count = 0;
+
             foreach ($drugstore as $key => $value) {
-                if ($key < 2) {
+                if ($user->district == $value->district) {
                     $distance = $map->getDistanceByMatrix($addressOrigin, $value->address);
-                    $listDrugstore[$key]['id'] = $value->id;
-                    $listDrugstore[$key]['name'] = $value->name;
-                    $listDrugstore[$key]['address'] = $value->address;
-                    $listDrugstore[$key]['distance'] = $distance[0];
-                    $listDrugstore[$key]['duration'] = $distance[1];
+                    $listDrugstore[$count]['id'] = $count;
+                    $listDrugstore[$count]['name'] = $value->name;
+                    $listDrugstore[$count]['address'] = $value->address;
+                    $listDrugstore[$count]['distance'] = $distance[0];
+                    $listDrugstore[$count]['duration'] = $distance[1];
 
                     $address = $map->getGeoCodeFromAddress($value->address);
-                    $listDrugstore[$key]['latitude'] = explode(',', $address)[0];
-                    $listDrugstore[$key]['longitude'] = explode(',', $address)[1];
+                    $listDrugstore[$count]['latitude'] = explode(',', $address)[0];
+                    $listDrugstore[$count]['longitude'] = explode(',', $address)[1];
+                    $count++;
                 }
             }
 
@@ -89,7 +96,7 @@ class MatrixController extends Controller
                 }
             }
 
-            dd($origin);
+            $origin = explode(',', $origin);
 
             return view('client.list-drugstore', compact('listDrugstore', 'origin', 'addressOrigin'));
         } else {
