@@ -16,6 +16,8 @@
 			margin: 0;
 		}
 	</style>
+  <div class="breadcrumb mt-3"><a href="/" class="no-underline">Trang chủ</a> <a href=""
+    class="no-underline">Hieeuk thuốc gần nhà</a></div>
 
 	<div style="position:relative;width: 100%;height: 100vh;">
 		<div id="mapid" style="width: 100%; height: 70%"></div>

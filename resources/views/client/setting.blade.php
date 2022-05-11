@@ -1,8 +1,8 @@
 @extends('client.layout.index')
 @section('content')
     <div id="wrapper" class="container">
-        <div class="breadcrumb-vn"><label class="font-weight-600">Trang chủ/</label><span> Cài đặt</span></div>
-        <div class="row">
+        <div class="breadcrumb mt-3"><a href="/" class="no-underline">Trang chủ</a> <a href=""
+            class="no-underline">Cài đặt</a></div>        <div class="row">
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body p-0">

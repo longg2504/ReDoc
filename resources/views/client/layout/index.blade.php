@@ -109,6 +109,37 @@
             background-color: #f6f6f6;
         }
 
+        .breadcrumb {
+            
+            margin-bottom: 30px;
+            margin-top: 10px;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .breadcrumb a {
+            font-size: 16px;
+            font-weight: 400;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #fa8c1d;
+        }
+
+        .breadcrumb a:last-child {
+            color: #333;
+        }
+
+        .breadcrumb a:first-child:after {
+            content: "\F054";
+            font-family: FontAwesome;
+            margin-left: 5px;
+            font-size: 10px;
+        }
+
     </style>
 </head>
 

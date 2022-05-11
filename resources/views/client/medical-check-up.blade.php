@@ -8,7 +8,8 @@
 
     </style>
     <div id="wrapper" class="container">
-        <div class="breadcrumb-vn mt-4"><label class="font-weight-600">Trang chủ/</label><span> Tra cứu bệnh</span></div>
+        <div class="breadcrumb mt-3"><a href="/" class="no-underline">Trang chủ</a> <a href=""
+                class="no-underline">Tra cứu bệnh</a></div>
         <div class="card text-left mt-4">
             <div class="card-body">
                 <h6 class="card-title">Tìm kiếm bệnh theo triệu chứng</h6>

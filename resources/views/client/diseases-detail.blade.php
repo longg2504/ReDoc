@@ -78,7 +78,7 @@
                 <form action="{{ route('client.matrix') }}" method="post">
                     @csrf
                     <input type="hidden" name="origin" value="{{ $user->address }}">
-                    <button type="submit" class="btn btn-primary">Nhà Thuốc gần bạn</button>
+                    <button type="submit" class="btn btn-primary">Gợi ý đến hiệu thuốc gần nhất</button>
                 </form>
             @endif
         </div>

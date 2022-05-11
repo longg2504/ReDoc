@@ -162,6 +162,8 @@
         margin-bottom: 10px;
     }
 
+
+
 </style>
 @section('content')
     <div class="breadcrumb mt-4"><label class="font-weight-600">Trang chủ</div>
@@ -180,7 +182,7 @@
         </div>
         <div class="col-md-9 pr-0">
             <div class="breadcrumb">
-                <a href="/" class="no-underline">Tin tức</a>
+                <a href="/" class="no-underline">Trang chủ</a>
                 @if (url()->current() != route('client.index'))
                     <span class="icon-title"></span>
                     <span>
@@ -198,9 +200,9 @@
                                         alt="{{ $post->title }}"
                                         src="{{ $post->media->getMedia($post->media, 'thumb') }}" lazy="loaded"></a>
                                 <div class="post-content">
-                                    <h2><a href="/post/{{ $post->id }}">{{$post->title}}</a>
+                                    <h2><a href="/post/{{ $post->id }}">{{ $post->title }}</a>
                                     </h2>
-                                    <p>{{$post->description}}</p>
+                                    <p>{{ $post->description }}</p>
                                 </div>
                             </li>
                         @endforeach
