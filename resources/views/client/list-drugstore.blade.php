@@ -27,8 +27,18 @@
     <script>
 
         var listDrugstore = {!! json_encode($listDrugstore) !!};
+        var origin = {!! json_encode($origin) !!};
+        var addressOrigin = {!! json_encode($addressOrigin) !!};
 
         var locations = [];
+
+        locations.push({
+            "x": origin,
+            "y": origin[0],
+            "id": 0,
+            "name": "Địa chỉ của bạn",
+            "address": addressOrigin
+        })
 
         listDrugstore.forEach(element => {
 
@@ -41,6 +51,7 @@
             })
         });
 
+        console.log(origin);
         console.log(locations);
 
         var mapLocations = {};
@@ -94,6 +105,7 @@
 
                 mapLocations[locations[i].id] = locations[i];
             }
+
             markersLayer.addTo(mymap);
 
         }

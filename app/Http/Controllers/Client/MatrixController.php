@@ -61,10 +61,12 @@ class MatrixController extends Controller
             $drugstore = Drugstores::all();
             $listDrugstore = [];
             $user = Auth::user();
+            $addressOrigin = $user->address;
+            $origin = $map->getGeoCodeFromAddress($addressOrigin);
 
             foreach ($drugstore as $key => $value) {
                 if ($key < 2) {
-                    $distance = $map->getDistanceByMatrix($user->address, $value->address);
+                    $distance = $map->getDistanceByMatrix($addressOrigin, $value->address);
                     $listDrugstore[$key]['id'] = $value->id;
                     $listDrugstore[$key]['name'] = $value->name;
                     $listDrugstore[$key]['address'] = $value->address;
@@ -87,7 +89,9 @@ class MatrixController extends Controller
                 }
             }
 
-            return view('client.list-drugstore', compact('listDrugstore'));
+            dd($origin);
+
+            return view('client.list-drugstore', compact('listDrugstore', 'origin', 'addressOrigin'));
         } else {
             return redirect()->route('client.login');
         }
