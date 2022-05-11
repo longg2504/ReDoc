@@ -162,8 +162,6 @@
         margin-bottom: 10px;
     }
 
-
-
 </style>
 @section('content')
     <div class="breadcrumb mt-4"><label class="font-weight-600">Trang chủ</div>
@@ -209,6 +207,23 @@
                     @endif
                 </ul>
             </div>
+
+            @if ($posts->total() > 1)
+                <div class="pagination  justify-content-center">
+                    <div class="vh"> kết quả.</div>
+                    <span class="step-links">
+                        @if ($posts->previousPageUrl())
+                            <a href="{{ $posts->previousPageUrl() }}">Trang trước</a>
+                        @endif
+                        <span class="current">
+                            Trang {{ $posts->currentPage() }} / {{ $posts->total() }}
+                        </span>
+                        @if ($posts->nextPageUrl())
+                            <a href="{{ $posts->nextPageUrl() }}">Trang sau</a>
+                        @endif
+                    </span>
+                </div>
+            @endif
         </div>
     </div>
 @endsection
