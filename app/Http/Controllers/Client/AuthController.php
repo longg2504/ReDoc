@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Controllers\AdminController;
+use App\Http\Requests\Client\Auth\SingupRequest;
 
 class AuthController extends AdminController
 {
@@ -22,21 +23,21 @@ class AuthController extends AdminController
         return view('client.sign-up');
     }
 
-    public function postRegister(Request $request)
+    public function postRegister(SingupRequest $request)
     {
         try {
 
-            $validator = Validator::make($request->all(), [
-                'username' => 'required',
-                'password' => 'required',
-                'email' => 'required|email'
-            ]);
+            // $validator = Validator::make($request->all(), [
+            //     'username' => 'required',
+            //     'password' => 'required',
+            //     'email' => 'required|email'
+            // ]);
 
-            if ($validator->fails()) {
+            // if ($validator->fails()) {
 
-                Alert::error('error', 'Thiếu thông tin cần thiết !');
-                return back();
-            }
+            //     Alert::error('error', 'Thiếu thông tin cần thiết !');
+            //     return back();
+            // }
 
             $userWithName = User::where('username', $request->username)->first();
             $userWithEmail = User::where('email', $request->email)->first();
@@ -64,7 +65,6 @@ class AuthController extends AdminController
 
             Alert::success('success', 'Đăng ký thành công!');
             return redirect()->route('client.login');
-
         } catch (\Exception $ex) {
 
             Alert::error('error', 'Lỗi: ' . $ex->getMessage());
@@ -127,7 +127,8 @@ class AuthController extends AdminController
     }
 
 
-    public function setting(){
+    public function setting()
+    {
         $user = Auth::user();
         return view('client.setting', compact('user'));
     }

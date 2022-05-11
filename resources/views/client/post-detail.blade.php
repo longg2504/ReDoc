@@ -152,6 +152,11 @@
             margin-bottom: 10px;
         }
 
+        .link-post {
+            color: #337ab7;
+
+        }
+
     </style>
     <div class="breadcrumb"><a href="/" class="no-underline">Tin tức</a> <a href=""
             class="no-underline">{{ @$post->categories->name }}</a></div>
@@ -196,16 +201,12 @@
                                     <div class="post-content"><a href="/post/{{ $post->id }}"
                                             class="post-title related-link">{{ $post->title }}</a>
                                         <p class="post_intro">
-                                            Với mong muốn tiếp tục giải đáp những câu hỏi của khách hàng về các giai đoạn
-                                            phát triển
-                                            của ung thư dạ dày, đại trực tràng; cách sàng lọc cũng như các phương pháp điều
-                                            trị tân
-                                            tiến đem ...
-                                        </p> <a href="/post/{{ $post->id }}" class="post-readmore related-link">
+                                        <p>{{ @$post->description }}
+                                            <a href="/post/{{ $post->id }}" class="link-post">
+                                                Đọc thêm
+                                            </a>
+                                        </p>
 
-                                            Đọc thêm
-
-                                        </a>
                                     </div>
                                 </div>
                             </li>

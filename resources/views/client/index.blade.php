@@ -180,7 +180,7 @@
         </div>
         <div class="col-md-9 pr-0">
             <div class="breadcrumb">
-                <a href="/" class="no-underline">Tin tức</a>
+                <a href="/" class="no-underline">Trang chủ</a>
                 @if (url()->current() != route('client.index'))
                     <span class="icon-title"></span>
                     <span>
@@ -198,15 +198,32 @@
                                         alt="{{ $post->title }}"
                                         src="{{ $post->media->getMedia($post->media, 'thumb') }}" lazy="loaded"></a>
                                 <div class="post-content">
-                                    <h2><a href="/post/{{ $post->id }}">{{$post->title}}</a>
+                                    <h2><a href="/post/{{ $post->id }}">{{ $post->title }}</a>
                                     </h2>
-                                    <p>{{$post->description}}</p>
+                                    <p>{{ $post->description }}</p>
                                 </div>
                             </li>
                         @endforeach
                     @endif
                 </ul>
             </div>
+
+            @if ($posts->total() > 1)
+                <div class="pagination  justify-content-center">
+                    <div class="vh"> kết quả.</div>
+                    <span class="step-links">
+                        @if ($posts->previousPageUrl())
+                            <a href="{{ $posts->previousPageUrl() }}">Trang trước</a>
+                        @endif
+                        <span class="current">
+                            Trang {{ $posts->currentPage() }} / {{ $posts->total() }}
+                        </span>
+                        @if ($posts->nextPageUrl())
+                            <a href="{{ $posts->nextPageUrl() }}">Trang sau</a>
+                        @endif
+                    </span>
+                </div>
+            @endif
         </div>
     </div>
 @endsection
