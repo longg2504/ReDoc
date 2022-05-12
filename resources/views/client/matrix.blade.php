@@ -76,7 +76,7 @@
 
         let mymap = L.map('mapid').setView([origin.latitude, origin.longitude], 13);
 
-        L.tileLayer('https://maps.vietmap.vn/tm/{z}/{x}/{y}@2x.png?apikey=2a549e9d588f70590da10665c733e5c5f0f0961393c3374c', {
+        L.tileLayer('https://maps.vietmap.vn/tm/{z}/{x}/{y}@2x.png?apikey=b351baf1a7da8fcbb75a4a480e849ae4a8b7e48d1d1ff046', {
             maxZoom: 17,
             id: 'vietmap',
             tileSize: 512,
@@ -150,7 +150,7 @@
                 redirect: 'follow'
             };
             var points = locations.map(p => `point=${p.y},${p.x}`).join("&");
-            fetch(`https://maps.vietmap.vn/api/route?api-version=1.1&apikey=2a549e9d588f70590da10665c733e5c5f0f0961393c3374c&vehicle=car&${points}`,
+            fetch(`https://maps.vietmap.vn/api/route?api-version=1.1&apikey=b351baf1a7da8fcbb75a4a480e849ae4a8b7e48d1d1ff046&vehicle=car&${points}`,
                     requestOptions)
                 .then(response => response.text())
                 .then(result => {
@@ -189,7 +189,7 @@
             document.getElementById('mapRaw').innerHTML = '<div id="mapid1" style="width: 100%; height: 100%"></div>';
 
             var mymap = L.map('mapid1').setView([origin.latitude, origin.longitude], 13);
-            L.tileLayer('https://maps.vietmap.vn/tm/{z}/{x}/{y}@2x.png?apikey=2a549e9d588f70590da10665c733e5c5f0f0961393c3374c', {
+            L.tileLayer('https://maps.vietmap.vn/tm/{z}/{x}/{y}@2x.png?apikey=b351baf1a7da8fcbb75a4a480e849ae4a8b7e48d1d1ff046', {
                 maxZoom: 17,
                 id: 'vietmap',
                 tileSize: 512,
