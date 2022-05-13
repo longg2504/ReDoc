@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Http;
 
 class CalculateDistanceService
 {
-    const VM_API_KEY = 'b351baf1a7da8fcbb75a4a480e849ae4a8b7e48d1d1ff046';
-    // const VM_API_KEY = 'b351baf1a7da8fcbb75a4a480e849ae4a8b7e48d1d1ff046';
+    const VM_API_KEY = '2a549e9d588f70590da10665c733e5c5f0f0961393c3374c';
+    // const VM_API_KEY = '2a549e9d588f70590da10665c733e5c5f0f0961393c3374c';
     const ROUTE_API_URL = 'https://maps.vietmap.vn/api/route';
     const SEARCH_API_URL = 'https://maps.vietmap.vn/api/search';
 

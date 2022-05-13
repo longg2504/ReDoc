@@ -21,7 +21,7 @@ $(document).ready(function () {
     }
 
     var mymap = L.map('mapid').setView([10.78252517522869, 106.68534799462223], 13);
-    L.tileLayer('https://maps.vietmap.vn/tm/{z}/{x}/{y}@2x.png?apikey=b351baf1a7da8fcbb75a4a480e849ae4a8b7e48d1d1ff046', {
+    L.tileLayer('https://maps.vietmap.vn/tm/{z}/{x}/{y}@2x.png?apikey=2a549e9d588f70590da10665c733e5c5f0f0961393c3374c', {
         maxZoom: 20,
         id: 'vietmap',
         tileSize: 512,
@@ -75,7 +75,7 @@ $(document).ready(function () {
     redirect: 'follow'
     };
     var points=locations.map(p=>`point=${p.y},${p.x}`).join("&");
-    fetch(`https://maps.vietmap.vn/api/route?api-version=1.1&apikey=b351baf1a7da8fcbb75a4a480e849ae4a8b7e48d1d1ff046&vehicle=car&${points}`, requestOptions)
+    fetch(`https://maps.vietmap.vn/api/route?api-version=1.1&apikey=2a549e9d588f70590da10665c733e5c5f0f0961393c3374c&vehicle=car&${points}`, requestOptions)
     .then(response => response.text())
     .then(result =>{
         var resRouting=JSON.parse(result);

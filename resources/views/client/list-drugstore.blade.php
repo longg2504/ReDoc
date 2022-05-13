@@ -61,7 +61,7 @@
         }
 
         var mymap = L.map('mapid').setView([origin[0], origin[1]], 13);
-        L.tileLayer('https://maps.vietmap.vn/tm/{z}/{x}/{y}@2x.png?apikey=b351baf1a7da8fcbb75a4a480e849ae4a8b7e48d1d1ff046', {
+        L.tileLayer('https://maps.vietmap.vn/tm/{z}/{x}/{y}@2x.png?apikey=2a549e9d588f70590da10665c733e5c5f0f0961393c3374c', {
             maxZoom: 17,
             id: 'vietmap',
             tileSize: 512,
