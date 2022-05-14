@@ -19,14 +19,13 @@
         }
 
     </style>
-    <div class="breadcrumb mt-4"><label class="font-weight-600">Chi tiết về bệnh</label>
-        <span>{{ ' > ' . $disease->name }}</span>
-    </div>
+
+    <div class="breadcrumb mt-3"><a href="/" class="no-underline">Trang chủ</a> <a href="/medical-check-up" class="no-underline">Tra cứu bệnh</a><a href="/" class="no-underline">{{$disease->name}}</a></div>
 
     <div class="row bg-white">
         <div class="content col-xs-12 col-md-12 no-paddings-sm mt-1">
             <h3>{{ $disease->name }}</h3>
-            <img src="{{ $disease->media->getMedia($disease->media, 'thumb') }}" alt="{{ $disease->name }}" class="img-fluid">
+            <img src="{{ $disease->media->getMedia($disease->   media, 'thumb') }}" alt="{{ $disease->name }}" class="img-fluid">
         </div>
 
         <div class="content col-xs-12 col-md-12 no-paddings-sm mt-1">

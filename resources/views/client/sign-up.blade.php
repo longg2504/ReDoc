@@ -42,7 +42,8 @@
                         @csrf
                         <div class="form-group">
                             <label>Tên tài khoản<span class="text-danger"> *</span></label>
-                            <input name="username" placeholder="Nhập tên tài khoản" formcontrolname="fullName"
+                            <input name="username" value="{{ old('username') }}" placeholder="Nhập tên tài khoản"
+                                formcontrolname="fullName"
                                 class="form-control input-custom ng-untouched ng-pristine ng-invalid" />
                             @error('username')
                                 <small class="text-danger">* {{ $message }}</small>
@@ -50,7 +51,8 @@
                         </div>
                         <div class="form-group">
                             <label>Email<span class="text-danger"> *</span></label>
-                            <input name="email" placeholder="Nhập email" formcontrolname="email"
+                            <input name="email" value="{{ old('email') }}" placeholder="Nhập email"
+                                formcontrolname="email"
                                 class="form-control input-custom ng-untouched ng-pristine ng-invalid" />
                             @error('email')
                                 <small class="text-danger">* {{ $message }}</small>
@@ -58,7 +60,8 @@
                         </div>
                         <div class="form-group">
                             <label>Địa chỉ<span class="text-danger"> *</span></label>
-                            <input name="address" placeholder="Nhập địa chỉ" formcontrolname="address"
+                            <input name="address" value="{{ old('address') }}" placeholder="Nhập địa chỉ"
+                                formcontrolname="address"
                                 class="form-control input-custom ng-untouched ng-pristine ng-invalid" />
                             @error('address')
                                 <small class="text-danger">* {{ $message }}</small>
@@ -66,7 +69,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Quận<span class="text-danger"> *</span></label>
-                            <select name="district" class="form-control" name="">
+                            <select name="district" class="form-control" name="" data-value="{{ old('district') }}">
                                 <option value="">
                                     <--- chọn quận --->
                                 </option>
@@ -80,13 +83,11 @@
                             <select class="form-control">
                                 <option selected value="1">Đà Nẵng</option>
                             </select>
-                            {{-- @error('city')
-                                <small class="text-danger">* {{ $message }}</small>
-                            @enderror --}}
                         </div>
                         <div class="form-group">
                             <label>Tuổi<span class="text-danger"> *</span></label>
-                            <input name="age" type="number" placeholder="Nhập tuổi" formcontrolname="age"
+                            <input name="age" type="number" value="{{ old('age') }}" placeholder="Nhập tuổi"
+                                formcontrolname="age"
                                 class="form-control input-custom ng-untouched ng-pristine ng-invalid" />
                             @error('age')
                                 <small class="text-danger">* {{ $message }}</small>
@@ -95,7 +96,8 @@
                         <div class="form-group">
                             <label>Mật khẩu<span class="text-danger"> *</span></label>
                             <div class="input-group mb-3">
-                                <input name="password" formcontrolname="password" placeholder="Nhập mật khẩu"
+                                <input name="password" value="{{ old('password') }}" formcontrolname="password"
+                                    placeholder="Nhập mật khẩu"
                                     class="form-control input-custom ng-dirty ng-valid ng-touched" type="password" />
                             </div>
                             @error('password')
@@ -105,8 +107,8 @@
                         <div class="form-group">
                             <label>Xác nhận mật khẩu<span class="text-danger"> *</span></label>
                             <div class="input-group mb-3">
-                                <input name="repassword" placeholder="Nhập xác nhận mật khẩu"
-                                    formcontrolname="passwordConfirm"
+                                <input name="repassword" value="{{ old('repassword') }}"
+                                    placeholder="Nhập xác nhận mật khẩu" formcontrolname="passwordConfirm"
                                     class="form-control input-custom ng-untouched ng-pristine ng-invalid"
                                     type="password" />
                             </div>
@@ -126,6 +128,7 @@
         <div class="col-md-8">
             <div class="auth-right"></div>
         </div>
+
     </div>
 
     <!-- Optional JavaScript -->
@@ -140,9 +143,16 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
     <script>
+        const districtValue = $('select[name="district"]').data('value');
+        console.log(districtValue);
         const district = ['Cẩm Lệ', 'Hải Châu', 'Liên Chiểu', 'Ngũ Hành Sơn', 'Sơn Trà', 'Thanh Khê'];
         district.forEach(element => {
-            $('select[name="district"]').append(`<option value="${element}">${element}</option>`)
+            if (districtValue == element) {
+                $('select[name="district"]').append(`<option selected value="${element}">${element}</option>`)
+            } else {
+                $('select[name="district"]').append(`<option value="${element}">${element}</option>`)
+            }
+
         });
     </script>
 </body>

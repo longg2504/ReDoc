@@ -1,8 +1,9 @@
 @extends('client.layout.index')
 @section('content')
     <div id="wrapper" class="container">
-        <div class="breadcrumb mt-3"><a href="/" class="no-underline">Trang chủ</a> <a href=""
-            class="no-underline">Cài đặt</a></div>        <div class="row">
+        <div class="breadcrumb mt-3"><a href="/" class="no-underline">Trang chủ</a> <a href="" class="no-underline">Cài
+                đặt</a></div>
+        <div class="row">
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body p-0">
@@ -23,6 +24,7 @@
                                     <a><span class="font-weight-600">Thay đổi thông tin</span></a>
                                 </div>
                             </div>
+
                             <div class="prof-sidebar-item prof-sidebar-item-active" tabindex="0" data-tab="password">
                                 <div class="p-2">
                                     <img src="/assets/img/setting-lock.svg" class="ng-star-inserted" />
@@ -33,7 +35,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="text-center mb-4 mr-3 ml-3"><a href="{{ route('client.logout') }}" class="btn btn-lg btn-logout btn-block">Đăng xuất</a></div>
+                        <div class="text-center mb-4 mr-3 ml-3"><a href="{{ route('client.logout') }}"
+                                class="btn btn-lg btn-logout btn-block">Đăng xuất</a></div>
                     </div>
                 </div>
             </div>
@@ -84,26 +87,56 @@
                                         <div class="form-group">
                                             <label>Tên người dùng <span class="text-danger"> *</span></label>
                                             <input type="text" name="username" formcontrolname="username"
-                                                placeholder="Nhập tên người dùng" value="{{ $user->username }}"
+                                                placeholder="Nhập tên người dùng"
+                                                value="{{ old('username', $user->username) }}"
                                                 class="form-control ng-untouched ng-pristine ng-invalid" />
+                                            @error('username')
+                                                <small class="text-danger">* {{ $message }}</small>
+                                            @enderror
                                         </div>
                                         <div class="form-group">
                                             <label>Email <span class="text-danger"> *</span></label>
                                             <input type="text" name="email" formcontrolname="email"
-                                                value="{{ $user->email }}" placeholder="Nhập email"
+                                                value="{{ old('username', $user->email) }}" placeholder="Nhập email"
                                                 class="form-control ng-dirty ng-valid ng-touched" />
+                                            @error('email')
+                                                <small class="text-danger">* {{ $message }}</small>
+                                            @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label>Địa chỉ <span class="text-danger"> *</span></label>
-                                            <input type="text" id="address" name="address" formcontrolname="address"
-                                                placeholder="Nhập địa chỉ" value="{{ $user->address }}"
-                                                class="form-control ng-dirty ng-valid ng-touched" />
+                                            <label>Địa chỉ<span class="text-danger"> *</span></label>
+                                            <input name="address" value="{{ old('username', $user->address) }}  "
+                                                placeholder="Nhập địa chỉ" formcontrolname="address"
+                                                class="form-control input-custom ng-untouched ng-pristine ng-invalid" />
+                                            @error('address')
+                                                <small class="text-danger">* {{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Quận<span class="text-danger"> *</span></label>
+                                            <select name="district" class="form-control" name="">
+                                                <option value="">
+                                                    <--- chọn quận --->
+                                                </option>
+                                            </select>
+                                            @error('district')
+                                                <small class="text-danger">* {{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Thành phố<span class="text-danger"> *</span></label>
+                                            <select class="form-control">
+                                                <option selected value="1">Đà Nẵng</option>
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label>Tuổi <span class="text-danger"> *</span></label>
                                             <input type="number" name="age" formcontrolname="age" placeholder="Nhập tuổi"
-                                                value="{{ $user->age }}"
+                                                value="{{ old('username', $user->age) }} "
                                                 class="form-control ng-dirty ng-valid ng-touched" />
+                                            @error('age')
+                                                <small class="text-danger">* {{ $message }}</small>
+                                            @enderror
                                         </div>
                                         <div class="form-group"><button class="btn vn-btn-success">Lưu</button></div>
                                     </form>
@@ -119,7 +152,10 @@
         </div>
         <script>
             $(document).ready(function() {
-                console.log($('.prof-sidebar-item'));
+                const district = ['Cẩm Lệ', 'Hải Châu', 'Liên Chiểu', 'Ngũ Hành Sơn', 'Sơn Trà', 'Thanh Khê'];
+                district.forEach(element => {
+                    $('select[name="district"]').append(`<option value="${element}">${element}</option>`)
+                });
                 $('.prof-sidebar-item').click(function() {
                     $('.prof-sidebar-item').removeClass('prof-sidebar-item-active');
                     $(this).addClass('prof-sidebar-item-active');
@@ -132,24 +168,30 @@
                     }
                 });
 
-                $('#address').on('input',function(e){
-                    var data = e.target.value;
-                    $.ajax({
-                        url : "/api/address-check/autocomplete",
-                        type : "post",
-                        dataType:"text",
-                        data : {
-                            address : data
-                        },
-                        success : function (data) {
-                            var res = JSON.parse(data);
+                // $('#address').on('input', function(e) {
+                //     var data = e.target.value;
+                //     $.ajax({
+                //         url: "/api/address-check/autocomplete",
+                //         type: "post",
+                //         dataType: "text",
+                //         data: {
+                //             address: data
+                //         },
+                //         success: function(data) {
+                //             var res = JSON.parse(data);
 
-                        }
-                    });
-                });
+                //             var listAdrres = [];
+                //             for (let index = 0; index < res.length; index++) {
+                //                 listAdrres.push(res[index].address);
+                //             }
+                //             $("#address").autocomplete({
+                //                 source: listAdrres
+                //             });
+                //         }
+                //     });
+                // });
 
             });
-
         </script>
         <style>
             .btn-logout {

@@ -216,7 +216,7 @@
                             <a href="{{ $posts->previousPageUrl() }}">Trang trước</a>
                         @endif
                         <span class="current">
-                            Trang {{ $posts->currentPage() }} / {{ $posts->total() }}
+                            Trang {{ $posts->currentPage() }} / {{ $posts->lastPage() }}
                         </span>
                         @if ($posts->nextPageUrl())
                             <a href="{{ $posts->nextPageUrl() }}">Trang sau</a>

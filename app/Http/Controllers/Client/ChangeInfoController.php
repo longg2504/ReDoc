@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AdminController;
+use App\Http\Requests\Client\Auth\SingupRequest;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ChangeInfoController extends AdminController
@@ -24,7 +25,7 @@ class ChangeInfoController extends AdminController
         return view('client.setting.change-info', compact('user'));
     }
 
-    public function updateInfo(Request $request)
+    public function updateInfo(SingupRequest $request)
     {
         $user = Auth::user();
         $this->updateOrCreate($request->all(), $user->id, new User());
