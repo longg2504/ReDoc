@@ -11,6 +11,7 @@ class CalculateDistanceService
     // const VM_API_KEY = '2a549e9d588f70590da10665c733e5c5f0f0961393c3374c';
     const ROUTE_API_URL = 'https://maps.vietmap.vn/api/route';
     const SEARCH_API_URL = 'https://maps.vietmap.vn/api/search';
+    const AUTOCOMPLETE_API_URL = 'https://maps.vietmap.vn/api/autocomplete';
 
     /**
      * @var Client
@@ -83,6 +84,50 @@ class CalculateDistanceService
                     return [$distance, $duration];
                 }
             }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param $keyword
+     * @return array|null
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function getAutocomplete($keyword): ?array
+    {
+        $response = $this->client->get(self::AUTOCOMPLETE_API_URL, [
+            'query' => [
+                'focus.point.lat' => 10.823984,
+                'focus.point.lon' => 106.633891,
+                'text' => $keyword,
+                'apikey' => self::VM_API_KEY,
+                'api-version' => 1.1,
+            ],
+        ]);
+
+        if ($response->getStatusCode() == 200) {
+            $content = $response->getBody()->getContents();
+            $output = json_decode($content);
+
+            $listCoordinates = [];
+
+            foreach ($output->data->features as $feature) {
+                $coordinates = $feature->geometry->coordinates;
+                $properties = $feature->properties;
+
+                $address = $properties->label;
+
+                $listCoordinates[] = [
+                    'address' => $address,
+                    'coordinates' => $coordinates,
+                ];
+            }
+
+            if (!empty($listCoordinates)) {
+                return $listCoordinates;
+            }
+
         }
 
         return null;

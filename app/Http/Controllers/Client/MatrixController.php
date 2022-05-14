@@ -59,6 +59,8 @@ class MatrixController extends Controller
 
     public function nearDrugstore() {
 
+        $map = new CalculateDistanceService();
+
         if (Auth::check()) {
             $map = new CalculateDistanceService();
 
@@ -102,6 +104,16 @@ class MatrixController extends Controller
         } else {
             return redirect()->route('client.login');
         }
+    }
+
+    public function getAutocomplete(Request $request) {
+
+        $map = new CalculateDistanceService();
+
+        $address = $map->getAutocomplete($request->address);
+
+        return response()->json($address);
+
     }
 }
 

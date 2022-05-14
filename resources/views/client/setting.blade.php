@@ -95,7 +95,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Địa chỉ <span class="text-danger"> *</span></label>
-                                            <input type="text" name="address" formcontrolname="address"
+                                            <input type="text" id="address" name="address" formcontrolname="address"
                                                 placeholder="Nhập địa chỉ" value="{{ $user->address }}"
                                                 class="form-control ng-dirty ng-valid ng-touched" />
                                         </div>
@@ -131,7 +131,25 @@
                         $('.card-show-content-password').removeClass('d-none');
                     }
                 });
+
+                $('#address').on('input',function(e){
+                    var data = e.target.value;
+                    $.ajax({
+                        url : "/api/address-check/autocomplete",
+                        type : "post",
+                        dataType:"text",
+                        data : {
+                            address : data
+                        },
+                        success : function (data) {
+                            var res = JSON.parse(data);
+
+                        }
+                    });
+                });
+
             });
+
         </script>
         <style>
             .btn-logout {

@@ -19,7 +19,25 @@
     <link href='https://vietmaps.vn/vietmap-gl-js/v1.0.0/vietmap-gl.css' rel='stylesheet' />
     <link href="https://vietmaps.vn/vietmap-gl-js/plugins/vietmaps-gl-directions/v1.0.0/vietmap-gl-directions.css" />
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    {{-- <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"> --}}
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> --}}
+    <link
+        href="https://code.jquery.com/ui/1.12.1/themes/ui-lightness/jquery-ui.css"
+        rel="stylesheet"
+    />
+    <script
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"
+    ></script>
+
+    <!-- ✅ load jQuery UI ✅ -->
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"
+        integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    ></script>
     <script defer
         src="https://maps.googleapis.com/maps/api/js?libraries=places&language=vi&key=AIzaSyAfPMMozZ7nfUi9jG9IidOMx2Bh16h1x3E"
         type="text/javascript"></script>
@@ -110,7 +128,7 @@
         }
 
         .breadcrumb {
-            
+
             margin-bottom: 30px;
             margin-top: 10px;
         }

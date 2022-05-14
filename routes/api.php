@@ -22,6 +22,7 @@ Route::namespace('App\Http\Controllers\Client')->group(function () {
 
     Route::post('/medical-check-up/symptoms', 'MedicalCheckController@getSymptoms')->name('client.getSymptoms');
     Route::post('/medical-check-up/diseases', 'MedicalCheckController@getDiseases')->name('client.getDiseases');
+    Route::post('/address-check/autocomplete', 'MatrixController@getAutocomplete')->name('client.getAutocomplete');
 
 });
 
