@@ -131,7 +131,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Tuổi <span class="text-danger"> *</span></label>
-                                            <input type="number" name="age" formcontrolname="age" placeholder="Nhập tuổi"
+                                            <input type="text" name="age" formcontrolname="age" placeholder="Nhập tuổi"
                                                 value="{{ old('username', $user->age) }} "
                                                 class="form-control ng-dirty ng-valid ng-touched" />
                                             @error('age')
@@ -152,6 +152,8 @@
         </div>
         <script>
             $(document).ready(function() {
+                const user = @json($user);
+
                 const district = ['Cẩm Lệ', 'Hải Châu', 'Liên Chiểu', 'Ngũ Hành Sơn', 'Sơn Trà', 'Thanh Khê'];
                 district.forEach(element => {
                     $('select[name="district"]').append(`<option value="${element}">${element}</option>`)
@@ -167,6 +169,8 @@
                         $('.card-show-content-password').removeClass('d-none');
                     }
                 });
+
+                $(`select[name="district"] option[value="${user.district}"]`).attr('selected', true);
 
                 // $('#address').on('input', function(e) {
                 //     var data = e.target.value;

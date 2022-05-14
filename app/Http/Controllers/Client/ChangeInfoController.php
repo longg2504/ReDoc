@@ -22,12 +22,14 @@ class ChangeInfoController extends AdminController
     public function changeInfo(Request $request)
     {
         $user = Auth::user();
+
         return view('client.setting.change-info', compact('user'));
     }
 
-    public function updateInfo(SingupRequest $request)
+    public function updateInfo(Request $request)
     {
         $user = Auth::user();
+
         $this->updateOrCreate($request->all(), $user->id, new User());
 
         Alert::success('success', 'Cập nhật thông tin thành công!');
