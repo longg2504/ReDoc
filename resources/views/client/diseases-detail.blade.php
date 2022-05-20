@@ -25,7 +25,7 @@
     <div class="row bg-white">
         <div class="content col-xs-12 col-md-12 no-paddings-sm mt-1">
             <h3>{{ $disease->name }}</h3>
-            <img src="{{ $disease->media->getMedia($disease->   media, 'thumb') }}" alt="{{ $disease->name }}" class="img-fluid">
+            <img src="{{ $disease->media->getMedia($disease->media, 'thumb') }}" alt="{{ $disease->name }}" class="img-fluid">
         </div>
 
         <div class="content col-xs-12 col-md-12 no-paddings-sm mt-1">
