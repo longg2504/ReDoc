@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Controllers\AdminController;
 use App\Http\Requests\Client\Auth\SingupRequest;
+use Illuminate\Support\Str;
 
 class AuthController extends AdminController
 {
@@ -47,8 +48,14 @@ class AuthController extends AdminController
                 return redirect()->back();
             }
 
-            $request->merge(['active' => 1]);
+            if(!Str::contains($request->address, "Đà Nẵng")) {
+                $request->merge(['active' => 1, 'address' => $request->address . ', ' . $request->district . ', ' . "Đà Nẵng"]);
+            } else {
+                $request->merge(['active' => 1]);
+            }
+
             unset($request['repassword']);
+
             $this->updateOrCreate($request->all(), null, new User());
 
             Alert::success('success', 'Đăng ký thành công!');

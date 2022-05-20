@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AdminController;
 use App\Http\Requests\Client\Auth\SingupRequest;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Str;
 
 class ChangeInfoController extends AdminController
 {
@@ -22,12 +23,18 @@ class ChangeInfoController extends AdminController
     public function changeInfo(Request $request)
     {
         $user = Auth::user();
+
         return view('client.setting.change-info', compact('user'));
     }
 
-    public function updateInfo(SingupRequest $request)
+    public function updateInfo(Request $request)
     {
         $user = Auth::user();
+
+        if(!Str::contains($request->address, "Đà Nẵng")) {
+            $request->merge(['address' => $request->address . ', ' . $request->district . ', ' . "Đà Nẵng"]);
+        }
+
         $this->updateOrCreate($request->all(), $user->id, new User());
 
         Alert::success('success', 'Cập nhật thông tin thành công!');
