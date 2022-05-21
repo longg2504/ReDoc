@@ -35,8 +35,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="text-center mb-4 mr-3 ml-3"><a href="{{ route('client.logout') }}"
-                                class="btn btn-lg btn-logout btn-block">Đăng xuất</a></div>
                     </div>
                 </div>
             </div>

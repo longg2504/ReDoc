@@ -142,7 +142,14 @@
             color: #333;
         }
 
-        .breadcrumb a:first-child:after {
+        .breadcrumb a: {
+            content: "\F054";
+            font-family: FontAwesome;
+            margin-left: 5px;
+            font-size: 10px;
+        }
+
+        .breadcrumb a:not(:last-child)::after {
             content: "\F054";
             font-family: FontAwesome;
             margin-left: 5px;
@@ -160,7 +167,6 @@
     @include('client.includes.header')
     <div id="wrapper" class="container">
         @yield('content')
-        <!---->
     </div>
 
     <script>

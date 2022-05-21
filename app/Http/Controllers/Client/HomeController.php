@@ -21,7 +21,7 @@ class HomeController extends Controller
     public function getByCategory($category_id) {
         $categories = Categories::all();
         $nameCategory = Categories::find($category_id)->name;
-        $posts = Posts::where('category_id', $category_id)->paginate(10);
+        $posts = Posts::where('category_id', $category_id)->paginate(5);
         return view('client.index', compact('posts','categories','nameCategory'));
     }
 
@@ -31,7 +31,7 @@ class HomeController extends Controller
         $relatedPosts = Posts::where('category_id', $post->category_id)->where('id', '!=', $post_id)->limit(5)->get();
         $relatedPostsWithTag = Post_tags::with('posts')->whereIn('tag_id', $post->tags()->pluck('tags.id')->toArray())->limit(5)->get();
 
-      
+
         return view('client.post-detail', compact('post', 'relatedPosts', 'relatedPostsWithTag'));
     }
 }

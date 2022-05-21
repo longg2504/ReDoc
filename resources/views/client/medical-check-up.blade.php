@@ -5,7 +5,9 @@
         .font-weight-600 {
             font-weight: 600;
         }
-
+        .img-diseases {
+            height: 100px !important;
+        }
     </style>
     <div id="wrapper" class="container">
         <div class="breadcrumb mt-3"><a href="/" class="no-underline">Trang chủ</a> <a href=""

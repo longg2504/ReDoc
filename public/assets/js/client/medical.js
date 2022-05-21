@@ -50,14 +50,13 @@ $(document).ready(function () {
                             $('.list-diseases').append(`
                                 <a href="/diseases/${data[i][0].id}">
                                     <div class="card">
-                                     <img class="card-img-top" src="${url + data[i][0].media.name}" alt="">
+                                     <img class="card-img-top img-diseases" src="${url + data[i][0].media.name}" alt="">
                                         <div class="card-body">
                                             <h6 class="card-title">${data[i][0].name}</h6>
                                         </div>
                                     </div>
                                 </a>
                             `);
-
                         }
                     }
                 } else {

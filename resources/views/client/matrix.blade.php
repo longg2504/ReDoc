@@ -43,7 +43,6 @@
 @endsection
 @section('js')
     <script>
-
         var nearest = {!! json_encode($nearest) !!};
         var origin = {!! json_encode($origin) !!};
         var listDrugstore = {!! json_encode($listDrugstore) !!};
@@ -76,7 +75,8 @@
 
         let mymap = L.map('mapid').setView([origin.latitude, origin.longitude], 13);
 
-        L.tileLayer('https://maps.vietmap.vn/tm/{z}/{x}/{y}@2x.png?apikey=2a549e9d588f70590da10665c733e5c5f0f0961393c3374c', {
+        L.tileLayer(
+        'https://maps.vietmap.vn/tm/{z}/{x}/{y}@2x.png?apikey=2a549e9d588f70590da10665c733e5c5f0f0961393c3374c', {
             maxZoom: 17,
             id: 'vietmap',
             tileSize: 512,
@@ -171,7 +171,7 @@
         showPoint(mymap, markersLayer);
         showLine(mymap);
 
-        $("#select-drugstore").change(function(){
+        $("#select-drugstore").change(function() {
             var data = $(this).val();
             var key = data.split("-")[0];
             var distance = data.split("-")[1];
@@ -186,15 +186,17 @@
                 "address": listDrugstore[key].address
             })
 
-            document.getElementById('mapRaw').innerHTML = '<div id="mapid1" style="width: 100%; height: 100%"></div>';
+            document.getElementById('mapRaw').innerHTML =
+                '<div id="mapid1" style="width: 100%; height: 100%"></div>';
 
             var mymap = L.map('mapid1').setView([origin.latitude, origin.longitude], 13);
-            L.tileLayer('https://maps.vietmap.vn/tm/{z}/{x}/{y}@2x.png?apikey=2a549e9d588f70590da10665c733e5c5f0f0961393c3374c', {
-                maxZoom: 17,
-                id: 'vietmap',
-                tileSize: 512,
-                zoomOffset: -1
-            }).addTo(mymap);
+            L.tileLayer(
+                'https://maps.vietmap.vn/tm/{z}/{x}/{y}@2x.png?apikey=2a549e9d588f70590da10665c733e5c5f0f0961393c3374c', {
+                    maxZoom: 17,
+                    id: 'vietmap',
+                    tileSize: 512,
+                    zoomOffset: -1
+                }).addTo(mymap);
 
             var markersLayerNew = new L.LayerGroup();
 
@@ -206,8 +208,6 @@
             $("#distance_nearest").html('Quãng đường : ' + distance + ' km');
             $("#duration_nearest").html('Thời gian :' + duration + ' phút');
         });
-
-
     </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
