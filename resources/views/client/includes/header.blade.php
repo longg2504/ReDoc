@@ -52,15 +52,17 @@ $url = url()->current();
                     Hiệu thuốc gần bạn
                 </a>
             </li>
-            <li class="nav-item {{ $url === route('client.setting') ? 'active' : '' }} ">
-                <a tabindex="-1" aria-disabled="true" class="nav-link text-md-center"
-                    href="{{ route('client.setting') }}">
-                    <span class="material-icons-outlined d-md-block">
-                        <i class="fa fa-cog fa-nav" aria-hidden="true"></i>
-                    </span>
-                    Cài đặt
-                </a>
-            </li>
+            @if (Auth::user())
+                <li class="nav-item {{ $url === route('client.setting') ? 'active' : '' }} ">
+                    <a tabindex="-1" aria-disabled="true" class="nav-link text-md-center"
+                        href="{{ route('client.setting') }}">
+                        <span class="material-icons-outlined d-md-block">
+                            <i class="fa fa-cog fa-nav" aria-hidden="true"></i>
+                        </span>
+                        Cài đặt
+                    </a>
+                </li>
+            @endif
         </ul>
         <style>
             .sing-in {
@@ -72,12 +74,12 @@ $url = url()->current();
             @if (Auth::user())
                 <li class="nav-item sing-in dropdown mr-3">
                     <i class="fa fa-sign-in" aria-hidden="true"></i>
-                    <a href="{{route('client.logout')}}">Đăng xuất</a>
+                    <a href="{{ route('client.logout') }}">Đăng xuất</a>
                 </li>
             @else
                 <li class="nav-item sing-in dropdown mr-3">
                     <i class="fa fa-sign-in" aria-hidden="true"></i>
-                    <a href="{{route('client.login')}}">Đăng nhập</a>
+                    <a href="{{ route('client.login') }}">Đăng nhập</a>
                 </li>
             @endif
 
