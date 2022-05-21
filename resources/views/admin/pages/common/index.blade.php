@@ -1,7 +1,7 @@
 @extends('admin/layout/' . $layout)
 
 @section('subhead')
-    <title>ReDoc</title>
+    <title>BMC </title>
 @endsection
 
 @section('subcontent')

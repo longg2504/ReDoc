@@ -15,7 +15,7 @@ class SideMenu
         return [
             'dashboard' => [
                 'icon' => 'home',
-                'title' => 'Dashboard',
+                'title' => 'Tổng quan',
                 'route_name' => 'admin.dashboard.index',
                 'params' => [
                     'layout' => 'side-menu',
@@ -23,7 +23,7 @@ class SideMenu
             ],
             'users' => [
                 'icon' => 'users',
-                'title' => 'User',
+                'title' => 'Users',
                 'sub_menu' => [
                     'users' => [
                         'icon' => '',
@@ -31,7 +31,7 @@ class SideMenu
                         'params' => [
                             'layout' => 'side-menu'
                         ],
-                        'title' => 'List users'
+                        'title' => 'Danh sách người dùng'
                     ],
                     'administrators' => [
                         'icon' => '',
@@ -39,13 +39,13 @@ class SideMenu
                         'params' => [
                             'layout' => 'side-menu'
                         ],
-                        'title' => 'List administrators'
+                        'title' => 'Danh sách Admin'
                     ],
                 ]
             ],
             'categories' => [
                 'icon' => 'list',
-                'title' => 'Category',
+                'title' => 'Danh mục',
                 'route_name' => 'admin.categories.index',
                 'has_role' => [],
                 'params' => [
@@ -54,7 +54,7 @@ class SideMenu
             ],
             'drugstores' => [
                 'icon' => 'box',
-                'title' => 'Drugstore',
+                'title' => 'Nhà thuốc',
                 'route_name' => 'admin.drugstores.index',
                 'has_role' => [],
                 'params' => [
@@ -63,7 +63,7 @@ class SideMenu
             ],
             'medicines' => [
                 'icon' => 'crosshair',
-                'title' => 'Medicine',
+                'title' => 'Thuốc',
                 'route_name' => 'admin.medicines.index',
                 'has_role' => [],
                 'params' => [
@@ -72,7 +72,7 @@ class SideMenu
             ],
             'diseases' => [
                 'icon' => 'trello',
-                'title' => 'Disease',
+                'title' => 'Bệnh',
                 'route_name' => 'admin.diseases.index',
                 'has_role' => [],
                 'params' => [
@@ -81,7 +81,7 @@ class SideMenu
             ],
             'symptoms' => [
                 'icon' => 'layout',
-                'title' => 'Symptom',
+                'title' => 'Triệu chứng',
                 'route_name' => 'admin.symptoms.index',
                 'has_role' => [],
                 'params' => [
@@ -90,7 +90,7 @@ class SideMenu
             ],
             'disease-symptoms' => [
                 'icon' => 'hard-drive',
-                'title' => 'Disease symptoms',
+                'title' => 'Triệu chứng bệnh',
                 'route_name' => 'admin.disease-symptoms.index',
                 'has_role' => [],
                 'params' => [
@@ -99,7 +99,7 @@ class SideMenu
             ],
             'prescriptions' => [
                 'icon' => 'activity',
-                'title' => 'Prescription',
+                'title' => 'Đơn thuốc',
                 'route_name' => 'admin.prescriptions.index',
                 'has_role' => [],
                 'params' => [
@@ -108,7 +108,7 @@ class SideMenu
             ],
             'posts' => [
                 'icon' => 'file',
-                'title' => 'Post',
+                'title' => 'Bài viết',
                 'route_name' => 'admin.posts.index',
                 'has_role' => [],
                 'params' => [
@@ -126,7 +126,7 @@ class SideMenu
             ],
             'post-tags' => [
                 'icon' => 'file-text',
-                'title' => 'Post Tag',
+                'title' => 'Bài đăng',
                 'route_name' => 'admin.post-tags.index',
                 'has_role' => [],
                 'params' => [
@@ -136,7 +136,7 @@ class SideMenu
             "devider",
             'setting' => [
                 'icon' => 'settings',
-                'title' => 'Setting',
+                'title' => 'Cài đặt',
                 'sub_menu' => [
                     'side-menu' => [
                         'icon' => '',

@@ -37,12 +37,13 @@ class CategoriesController extends AdminController
 
         $controller = (new \ReflectionClass($this))->getShortName();
         $shortController = Common::getShortNameController($controller);
+        $title = "Danh mục";
         $this->controllerName = $shortController;
         $this->folderUpload = $shortController;
         $this->formFields = $this->getListFields("crud");
         $this->listFields = $this->getListFields("index");
         $this->searchFields = $this->getListFields("search");
-        $this->title = ucfirst(str_replace(['_', '-'], ' ', $shortController));
+        $this->title = ucfirst(str_replace(['_', '-'], ' ', $title));
 
         view()->share('folderUpload', $this->folderUpload);
         view()->share('formFields', $this->formFields);

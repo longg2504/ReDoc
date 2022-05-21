@@ -165,8 +165,7 @@
         }
 
     </style>
-    <div class="breadcrumb mt-4"><label class="font-weight-600">Trang chủ</div>
-    <div class="row bg-white">
+    <div class="row bg-white mt-3">
         <div class="col-md-3">
             <h3 class="title">Danh mục</h3>
             <ul class="list-categories">
