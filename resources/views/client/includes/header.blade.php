@@ -11,7 +11,7 @@
         color: #3bccbb;
     }
 
-    }
+    
 
 </style>
 @php

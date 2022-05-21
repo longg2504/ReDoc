@@ -100,6 +100,8 @@
         </div>
     </div>
 @endsection --}}
+
+@section('content')
 <style>
     h3.title {
         margin-top: 10px;
@@ -163,8 +165,7 @@
     }
 
 </style>
-@section('content')
-    <div class="breadcrumb mt-4"><label class="font-weight-600">Trang chủ</div>
+    <div class="breadcrumb mt-4"><label class="font-weight-600"></div>
     <div class="row bg-white">
         <div class="col-md-3">
             <h3 class="title">Danh mục</h3>
@@ -198,8 +199,7 @@
                                         alt="{{ $post->title }}"
                                         src="{{ $post->media->getMedia($post->media, 'thumb') }}" lazy="loaded"></a>
                                 <div class="post-content">
-                                    <h2><a href="/post/{{ $post->id }}">{{ $post->title }}</a>
-                                    </h2>
+                                    <h2><a href="/post/{{ $post->id }}">{{ $post->title }}</a></h2>
                                     <p>{{ $post->description }}</p>
                                 </div>
                             </li>
