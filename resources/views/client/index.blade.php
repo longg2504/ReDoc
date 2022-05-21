@@ -102,6 +102,72 @@
 @endsection --}}
 
 @section('content')
+<style>
+    h3.title {
+        margin-top: 10px;
+        font-weight: 600;
+        border-bottom: 1px solid #e8e8e8;
+        padding: 10px 0;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    ul.list-categories li {
+        border-bottom: 1px solid #e8e8e8;
+        padding: 10px 0;
+    }
+
+    ul.list-categories li a {
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .breadcrumb .icon-title:after {
+        content: "\F054";
+        font-family: FontAwesome;
+        margin-left: 5px;
+    }
+
+    .post-list ul li {
+        list-style: none;
+        overflow: hidden;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        font-size: 13px;
+        border-bottom: 1px solid #e8e8e8;
+    }
+
+    .breadcrumb {
+        padding: 8px 15px;
+        margin-bottom: 20px;
+        list-style: none;
+        background-color: #f5f5f5;
+        border-radius: 4px;
+    }
+
+    .has-zoomable.loaded-img {
+        clear: both;
+        cursor: pointer;
+        position: relative;
+        width: auto;
+    }
+
+    .post-list ul li img {
+        float: left;
+        margin-right: 15px;
+        max-width: 260px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+</style>
+    <div class="breadcrumb mt-4"><label class="font-weight-600"></div>
+
+@section('content')
     <style>
         h3.title {
             margin-top: 10px;

@@ -18,9 +18,21 @@
             margin: 0 -15px;
         }
 
+        tbody td {
+            text-align:  center;
+        }
+
+        tbody th {
+            text-align: center;
+        }
+
+        thead th {
+            text-align: center;
+        }
+
     </style>
 
-    <div class="breadcrumb mt-3"><a href="/" class="no-underline">Trang chủ</a> <a href="/medical-check-up" class="no-underline">Tra cứu bệnh</a><a href="/" class="no-underline">{{$disease->name}}</a></div>
+    <div class="breadcrumb mt-3"><a href="/" class="no-underline">Trang chủ</a> <a href="/medical-check-up" class="no-underline">Tra cứu bệnh<strong>></strong></a><a href="" class="no-underline">{{$disease->name}}</a></div>
 
     <div class="row bg-white">
         <div class="content col-xs-12 col-md-12 no-paddings-sm mt-1">
@@ -60,7 +72,7 @@
                             <th scope="row">{{ $key + 1 }}</th>
                             <td>{{ $item->medicines->name }}</td>
                             <td>
-                                <img style="width: 400px; height: 400px" src="{{ $item->medicines->media ? $item->medicines->media->getMedia($item->medicines->media, 'thumb') : "" }}" alt="{{ $item->medicines->name }}" class="img-fluid">
+                                <img style="width: 200px; height: 200px" src="{{ $item->medicines->media ? $item->medicines->media->getMedia($item->medicines->media, 'thumb') : "" }}" alt="{{ $item->medicines->name }}" class="img-fluid">
                             </td>
                             <td>{{ $item->amount }}</td>
                             <td>{{ $item->dosage }}</td>
